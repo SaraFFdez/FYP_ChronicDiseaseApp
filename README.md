@@ -1,1 +1,1 @@
-# FYP_ChronicDiseaseApp
+# App for chronic disease symptoms diary management 
