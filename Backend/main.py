@@ -3,7 +3,7 @@ import sys
 import InputHandling.audioToText as InpAudio
 import AudioProcessing.mainProcessing as ProcMain
 def main():
-    audioToProcess = "audio_files_harvard.wav"
+    audioToProcess = "FirstFYPaudio.wav"
     InpAudio.audioToText(audioToProcess)
     ProcMain.textProcessing("Lets go!")
 

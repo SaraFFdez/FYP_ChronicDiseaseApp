@@ -7,7 +7,7 @@ import speech_recognition as sr
 #Input: an audio file
 #Output: a file/text containing the audio in the file
 def audioToText(audio):
-    # obtain path to "english.wav" in the same folder as this script
+    # obtain path to the audio in the same folder as this script!!
     AUDIO_FILE = path.join(path.dirname(path.realpath(__file__)), audio)
 
     # use the audio file as the audio source
@@ -36,8 +36,7 @@ def audioToText(audio):
     return
 
 def notes(audio):
-    print("We will get the notes from the " + audio)
-    return 
+    return audioToText(audio)
 
 #helper functions 
 
