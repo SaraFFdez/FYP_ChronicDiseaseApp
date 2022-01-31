@@ -11,4 +11,16 @@ def symptomsList(text):
     print("We will get the syntoms list from the " + text)
     return 
 
+def dietRecord(text):
+    print("We will get the table for the diet from the " + text)
+    return 
+
+def activityLog(text):
+    print("We will get the table for the diet from the " + text)
+    return 
+
+def sleepQandQ(text):
+    print("We will get the table for the diet from the " + text)
+    return 
+
 #helper functions 
