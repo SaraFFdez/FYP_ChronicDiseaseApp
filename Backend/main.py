@@ -1,6 +1,6 @@
 import os
 import sys
-import InputHandling.audioToText as InpAudio
+import InputHandling.AudioToText as InpAudio
 import AudioProcessing.mainProcessing as ProcMain
 def main():
     audioToProcess = "FirstFYPaudio.wav"
