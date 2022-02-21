@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "fypapp-341220",
+  "private_key_id": "1f53f84dceaff54e786119bdd8e35ecb8cde9460",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCeWdKHWu64cgGn\nXAbWvDCkJnomC6YQqc3yPFar9qrTMC8xN/zneYHOm66IjbdrqRnthFmD8eQcuk/k\nga53lwmSWnacQxaM0iIY1oTpF3K7YKKVqRNmwFqsq78ctQVG2Nif5PBG8oz7riob\nwOmEhH1rREShn3amaWTiydBsV63h0whVDAoPVxOnrBkhg3BoUZ7YH87+kbYrYlTf\njJ7ggqNVSyPEwlkqXMlnAMy7hm+gGZtrTmz+97ypmD3FBcZAdUhWDuEDTPDZpuJA\nnyb6e2cELUK+VB2j9Rgd0+yfMdtuqi/MH0c+YFyWqkh4hD9sifU0JcJOYOwfF19x\nbqh7lPlBAgMBAAECggEALT20bH+KXKAV4N7mBUvXCc8EbwI8+93HvUGH8bGTtKq7\nkPBSDUAl2gWYo+L5WIUDp1x8xrnBVoPUd5Cla/12+p1l7dctBiazHy2K452TZf2B\n9ghMRrsGLPcUrvr4+vjRSz15eIurw+xKk4tWLEo+GvtyMEsC9yB9dl36cjnKsA3L\n72bRrafSoxaPE9+twK41YrSjh6HcfVweogzeEbk9UG0elYOkaoX0Dz2E1/Y1+WZS\nMRMnIvO5smOaLiLrgPygY9Zw6a9dUdbWnWY9kScovSMvUu/EaVwF5wq6Igdhr8ki\nadn/QqIvXLHJ9ZsPQ2qbgZGv0Lf09XwhNyiYvZzr0QKBgQDMqf/YFaErF+Nzr911\nyfN+06JauBBqIevxjbPO/MDddwtTi8sSghkiMWLBPCq+HTpM0Kqf5auiy6QaENxW\nE3iEHIi1iADfsAW91S0hoW3E9ELreX6QKaenwrcJI1MmGxGbX44wgJclJ4bB9uNv\napqw9vU3vsuGdynaOXNe7MNPUwKBgQDGEe9b+GCk3xEUbgBNocJJkZ14s5dHyCe+\nuvdhtdPVYIpQRL+Td0j6NhaGJSJMSXHTLco+qNE0osMhVA7WOhxppzEeMMCDjk9g\nMRSSPEbd41hCgz84lbIhucVssEvRLLpm/cLJPPkm0u5GzT/WNVEexkdv5PTch891\niFmSpagGmwKBgHq6ptVpgxBYbuj82Qy9Yer39i/4mL9MQDTGCMFjCDTGImCjP8+F\nfJTokJPYBLmkxUUzDF5+V4J0I6AN5FMpsednRQO23u9EmuzPXRUBvNWStF6IqMDC\nees79I7iRAZhzRkjIB0tv3VkUocWCiTSBJmCPmKDY4DrDIn0UZ7m0+hJAoGAAMO+\n9c7uqJRH35lRHPub4WbTgczHr7pBFQZpwBHQoIk/33F0f+A9AuJEkf4AtOSvsM4D\nctx5+kcKk81cRU1yIKJJmUE87QUWn1txJeNfrqmbBJ63FsPVLTYnYfUIReVzTsR6\nBQbcO18jFljifzQzfPfs/KyYmWVY0q5VEjDbhjMCgYBraO0wbG5MJfXVeul6Yk72\nFt0Y5oEFM2gTTDockt5afYgD5SeVM6vOJBlDwe1d4A8QzSNS/VcEu0FEQ9r+4PW8\nYARmWeHmm2RVpIoDFvQnuI+1zhLBeZA/6jKR69YFuUMD8Y3WVbuRT66gFJ62YUkZ\nH73F1La8+XrV2vxrf6rxsw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "fyp-account-2@fypapp-341220.iam.gserviceaccount.com",
+  "client_id": "104570742746901992737",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/fyp-account-2%40fypapp-341220.iam.gserviceaccount.com"
+}
