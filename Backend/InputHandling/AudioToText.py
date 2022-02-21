@@ -8,6 +8,7 @@ import speech_recognition as sr
 from google.cloud import speech
 import requests
 
+#----------------------------------------------------------Google Cloud API--------------------------------------------------------
 def googleCloudspeechToTex(audio):
     AUDIO_FILE = path.join(path.dirname(path.realpath(__file__)), audio)
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'Backend\googleSpeechCloudKey2.json'
@@ -29,7 +30,8 @@ def googleCloudspeechToTex(audio):
     )
     print(response_standard_wav)
 
-#helper
+#----------------------------------------------------------AssemblyAI--------------------------------------------------------
+#helper AssemblyAI
 def read_file(filename, chunk_size=5242880):
     with open(filename, 'rb') as _file:
         while True:
@@ -38,6 +40,7 @@ def read_file(filename, chunk_size=5242880):
                 break
             yield data
 
+#helper AssemblyAI
 def retrieve_transcript(transcript_id, headers1):
     response = requests.get("https://api.assemblyai.com/v2/transcript/" + transcript_id, headers = headers1)
     return response.json()
@@ -52,7 +55,9 @@ def AIspeechToTex(audio):
     audio_url = requests.post('https://api.assemblyai.com/v2/upload',
                         headers=headers,
                         data=read_file(AUDIO_FILE))
-    print(audio_url.json()['upload_url'])
+    #print(audio_url.json()['upload_url'])
+
+    #send it to the queue to be transcribed
     endpoint = "https://api.assemblyai.com/v2/transcript"
     json = {
         "audio_url": audio_url.json()['upload_url'],
@@ -64,10 +69,10 @@ def AIspeechToTex(audio):
     }
     response = requests.post(endpoint, json=json, headers=headers)
     transcript_id = response.json()['id']
-    print(transcript_id)
+    #print(transcript_id)
     
     # Step 2. Retrieve Job Status
-    #retrieve until status is completed.
+    #retrieve until status is completed and print the transciption. Sleep to not make too amany requests (might not be necessary)
     while True:
         time.sleep(3)
         response_status = retrieve_transcript(transcript_id, headers)
@@ -75,10 +80,7 @@ def AIspeechToTex(audio):
             print(response_status['text'])
             break  
 
-      
-
-
-    
+#---------------------------------------------------------- Sphinx --------------------------------------------------------   
 #Input: an audio file
 #Output: a file/text containing the audio in the file
 def audioToTextSphinx(audio):
