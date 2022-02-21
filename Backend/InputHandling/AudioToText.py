@@ -1,14 +1,34 @@
+from cgitb import enable
 import os
 from os import path
 import sys
 import speech_recognition as sr
-#import sphinxbase
-#import pocketsphinx
+from google.cloud import speech
 
+def googleCloudspeechToTex(audio):
+    AUDIO_FILE = path.join(path.dirname(path.realpath(__file__)), audio)
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'Backend\googleSpeechCloudKey2.json'
+    speech_client = speech.SpeechClient()
+    with open(AUDIO_FILE, 'rb') as f1:
+        byte_data = f1.read()
+    pAudio = speech.RecognitionAudio(content = byte_data)
+
+    config = speech.RecognitionConfig( #doesnt need to be a wav file which is nice. 
+        sample_rate_hertz = 48000,
+        enable_automatic_punctuation=True,
+        language_code = 'en-US',
+        audio_channel_count=1 #what this?
+    )
+    #recognize method for small local files (there is another for longer files)
+    response_standard_wav = speech_client.recognize(
+    config=config,
+    audio=pAudio
+    )
+    print(response_standard_wav)
 
 #Input: an audio file
 #Output: a file/text containing the audio in the file
-def audioToText(audio):
+def audioToTextSphinx(audio):
     # obtain path to the audio in the same folder as this script!!
     AUDIO_FILE = path.join(path.dirname(path.realpath(__file__)), audio)
 
@@ -25,29 +45,7 @@ def audioToText(audio):
     except sr.RequestError as e:
         print("Sphinx error; {0}".format(e))
 
-    # recognize speech using Google Speech Recognition
-    #try:
-    #    # for testing purposes, we're just using the default API key
-    #    # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")` instead of `r.recognize_google(audio)`
-    #    print("Google Speech Recognition thinks you said " + r.recognize_google(audio))
-    #except sr.UnknownValueError:
-    #    print("Google Speech Recognition could not understand audio")
-    #except sr.RequestError as e:
-    #    print("Could not request results from Google Speech Recognition service; {0}".format(e))
-#
-    #GOOGLE_CLOUD_SPEECH_CREDENTIALS = r"fypapp-341220-587a36006eab.json"
-    #try:
-    #    print("Google Cloud Speech thinks you said " + r.recognize_google_cloud(audio, credentials_json=GOOGLE_CLOUD_SPEECH_CREDENTIALS))
-    #except sr.UnknownValueError:
-    #    print("Google Cloud Speech Recognition could not understand audio")
-    #except sr.RequestError as e:
-    #    print("Could not request results from Google Speech Recognition service; {0}".format(e))
-    
     return
-
-def notes(audio):
-    return audioToText(audio)
-
 #helper functions 
 
 
