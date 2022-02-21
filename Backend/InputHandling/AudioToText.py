@@ -2,8 +2,11 @@ from cgitb import enable
 import os
 from os import path
 import sys
+import time
+
 import speech_recognition as sr
 from google.cloud import speech
+import requests
 
 def googleCloudspeechToTex(audio):
     AUDIO_FILE = path.join(path.dirname(path.realpath(__file__)), audio)
@@ -26,6 +29,56 @@ def googleCloudspeechToTex(audio):
     )
     print(response_standard_wav)
 
+#helper
+def read_file(filename, chunk_size=5242880):
+    with open(filename, 'rb') as _file:
+        while True:
+            data = _file.read(chunk_size)
+            if not data:
+                break
+            yield data
+
+def retrieve_transcript(transcript_id, headers1):
+    response = requests.get("https://api.assemblyai.com/v2/transcript/" + transcript_id, headers = headers1)
+    return response.json()
+
+def AIspeechToTex(audio):
+    #define audio file and API
+    AUDIO_FILE = path.join(path.dirname(path.realpath(__file__)), audio)
+    API_KEY = '546a6f9de8804c269d59cdcb9056cfa2'
+
+    #upload audio data to their web
+    headers = {'authorization': API_KEY}
+    audio_url = requests.post('https://api.assemblyai.com/v2/upload',
+                        headers=headers,
+                        data=read_file(AUDIO_FILE))
+    print(audio_url.json()['upload_url'])
+    endpoint = "https://api.assemblyai.com/v2/transcript"
+    json = {
+        "audio_url": audio_url.json()['upload_url'],
+        "language_code": "en_uk"
+    }
+    headers = {
+        "authorization": API_KEY,
+        "content-type": "application/json"
+    }
+    response = requests.post(endpoint, json=json, headers=headers)
+    transcript_id = response.json()['id']
+    print(transcript_id)
+    
+    # Step 2. Retrieve Job Status
+    #retrieve until status is completed.
+    while True:
+        time.sleep(3)
+        response_status = retrieve_transcript(transcript_id, headers)
+        if response_status['status'] == 'completed' :
+            print(response_status['text'])
+            break  
+
+      
+
+
+    
 #Input: an audio file
 #Output: a file/text containing the audio in the file
 def audioToTextSphinx(audio):
