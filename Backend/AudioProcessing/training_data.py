@@ -4,6 +4,8 @@ import random
 import json
 import spacy
 import re
+from spacy.tokens import DocBin
+from tqdm import tqdm
 
 def load_data(file):
     with open(file, "r", encoding="utf-8") as f:
@@ -19,48 +21,44 @@ def getting_data(text, array_of_symptoms):
         match = re.search(symptom, text)
         print (symptom, match)
 
-def train_spacy(data, iterations):
-    TRAIN_DATA = data
-    nlp = spacy.blank("en")
-    #create ner object
-    if 'ner' not in nlp.pipe_names:
-        ner = nlp.create_pipe('ner')
-        nlp.add_pipe(ner, last=True)
-    
-    for _, annotations in TRAIN_DATA:
-        for ent in annotations.get('entities'):
-            ner.add_label(ent[2])
+def change_data_to_v3(TRAIN_DATA):
+    nlp = spacy.blank("en") # load a new spacy model
+    db = DocBin() # create a DocBin object
 
-    other_pipes = [pipe for pipe in nlp.pipe_names if pipe != 'ner']
+    for text, annot in tqdm(TRAIN_DATA): # data in previous format
+        doc = nlp.make_doc(text) # create doc object from text
+        ents = []
+        for start, end, label in annot["entities"]: # add character indexes
+            span = doc.char_span(start, end, label=label, alignment_mode="contract")
+            if span is None:
+                print("Skipping entity")
+            else:
+                ents.append(span)
+        doc.ents = ents # label the text with the ents
+        db.add(doc)
+    return db
 
-    with nlp.disable_pipes(*other_pipes):  # only train NER
-        optimizer = nlp.begin_training()
-        for itn in range(iterations):
-            print("Statring iteration " + str(itn))
-            random.shuffle(TRAIN_DATA)
-            losses = {}
-            for text, annotations in TRAIN_DATA:
-                nlp.update(
-                    [text],  # batch of texts
-                    [annotations],  # batch of annotations
-                    drop=0.2,  # dropout - make it harder to memorise data
-                    sgd=optimizer,  # callable to update weights
-                    losses=losses)
-            print(losses)
-    return nlp
+def save_spacy_format():
+    TRAIN_DATA = load_data("Backend\\AudioProcessing\\trainingData\\symptomsML_training.json")
+    #VALIDATION_DATA = load_data("Backend\\AudioProcessing\\trainingData\\symptomsML_validation.json")
+    symptoms_train = change_data_to_v3(TRAIN_DATA)
+    #symptoms_validate = change_data_to_v3(VALIDATION_DATA)
+    symptoms_train.to_disk("Backend\\AudioProcessing\\trainingData\\symptomsML_training.spacy")
+    #symptoms_validate.to_disk("Backend\\AudioProcessing\\trainingData\\symptomsML_validate.spacy")
 
-TRAIN_DATA = load_data("Backend\\AudioProcessing\\trainingData\\symptomsML_training.json")
-prdnlp = train_spacy(TRAIN_DATA, 30)
+#IN ORDER TO TRAIN THE DATA RUN THIS IN CLI
+# py -m spacy train Backend\\AudioProcessing\\trainingData\\config_SympNER.cfg --output Backend\\AudioProcessing\\trainingData\\symp_NER_model --paths.train Backend\\AudioProcessing\\trainingData\\symptomsML_training.spacy --paths.dev Backend\\AudioProcessing\\trainingData\\symptomsML_validate.spacy
 
-# Save our trained Model
-modelfile = input("symptoms_model")
-prdnlp.to_disk(modelfile)
+#Test your model
+def test_model(text):
+    nlp = spacy.load(R"Backend\\AudioProcessing\\trainingData\\symp_NER_model\\model-best")
+    doc = nlp(text)
+    for ents in doc.ents:
+        print(ents.text, ents.label_)
 
-#Test your text
-#text = "People with ME/CFS often describe this experience as a “crash,” “relapse,” or “collapse.” During PEM, any ME/CFS symptoms may get worse or first appear, including #difficulty thinking, problems sleeping, sore throat, headaches, feeling dizzy, or severe tiredness. It may take days, weeks, or longer to recover from a crash. Sometimes #patients may be house-bound or even completely bed-bound during crashes. People with ME/CFS may not be able to predict what will cause a crash or how long it will last. "
-#test_text = input(text)
-#doc = prdnlp(test_text)
-#for ent in doc.ents:
-#    print(ent.text, ent.start_char, ent.end_char, ent.label_)
-#text = "People with ME/CFS often describe this experience as a “crash,” “relapse,” or “collapse.” During PEM, any ME/CFS symptoms may get worse or first appear, including difficulty thinking, problems sleeping, sore throat, headaches, feeling dizzy, or severe tiredness. It may take days, weeks, or longer to recover from a crash."
-#getting_data(text, ["PEM", "loss of energy", "problems sleeping", "difficulty thinking", "headaches", "sore throat", "dizzy", "tiredness"])
+text = "It felt like I had a chronic case of the flu: exhaustion so great I could not move; headaches, dizziness, muscle aches, especially in my legs; and profound exhaustion and mental fogginess, so I could not function. I was sensitive to noise and light. I was amazed that I was so sick physically and yet doctors didn't know what to do."
+getting_data(text, ["exhaustion", "headaches", "dizziness", "muscle aches", "exhaustion", "mental fogginess", "sick physically"])
+
+#test_model(text)
+# text = "The next day I woke up with the worst sore throat and felt sick overall, but I just kept going, thinking I would get better the next day. I developed bad vertigo, and also had fatigue and sleep problems. I went to the school health clinic and had a lot of tests done. All my tests came back fine— only months later I was found to have mononucleosis."
+# getting_data(text, ["sore throat", "sick", "vertigo", "fatigue", "sleep problems"])
