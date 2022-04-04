@@ -40,25 +40,30 @@ def change_data_to_v3(TRAIN_DATA):
 
 def save_spacy_format():
     TRAIN_DATA = load_data("Backend\\AudioProcessing\\trainingData\\symptomsML_training.json")
-    #VALIDATION_DATA = load_data("Backend\\AudioProcessing\\trainingData\\symptomsML_validation.json")
+    data_split_val = 0.3
+    VALIDATION_DATA = [] 
+    for i in range(0,int(len(TRAIN_DATA)*data_split_val)):
+        data = random.choice(TRAIN_DATA)
+        VALIDATION_DATA.append(data)
+        TRAIN_DATA.remove(data)
     symptoms_train = change_data_to_v3(TRAIN_DATA)
-    #symptoms_validate = change_data_to_v3(VALIDATION_DATA)
+    symptoms_validate = change_data_to_v3(VALIDATION_DATA)
     symptoms_train.to_disk("Backend\\AudioProcessing\\trainingData\\symptomsML_training.spacy")
-    #symptoms_validate.to_disk("Backend\\AudioProcessing\\trainingData\\symptomsML_validate.spacy")
+    symptoms_validate.to_disk("Backend\\AudioProcessing\\trainingData\\symptomsML_validate.spacy")
 
 #IN ORDER TO TRAIN THE DATA RUN THIS IN CLI
 # py -m spacy train Backend\\AudioProcessing\\trainingData\\config_SympNER.cfg --output Backend\\AudioProcessing\\trainingData\\symp_NER_model --paths.train Backend\\AudioProcessing\\trainingData\\symptomsML_training.spacy --paths.dev Backend\\AudioProcessing\\trainingData\\symptomsML_validate.spacy
+#save_spacy_format()
 
 #Test your model
 def test_model(text):
-    nlp = spacy.load(R"Backend\\AudioProcessing\\trainingData\\symp_NER_model\\model-best")
-    doc = nlp(text)
+    nlpSymp = spacy.load(R"Backend\\AudioProcessing\\trainingData\\symp_NER_model\\model-best")
+    doc = nlpSymp(text)
     for ents in doc.ents:
         print(ents.text, ents.label_)
 
-text = "It felt like I had a chronic case of the flu: exhaustion so great I could not move; headaches, dizziness, muscle aches, especially in my legs; and profound exhaustion and mental fogginess, so I could not function. I was sensitive to noise and light. I was amazed that I was so sick physically and yet doctors didn't know what to do."
-getting_data(text, ["exhaustion", "headaches", "dizziness", "muscle aches", "exhaustion", "mental fogginess", "sick physically"])
+# test_text = "today I had a headache and a felt really tired. I also had joint pains and a fever"
+# test_model(test_text)
 
-#test_model(text)
-# text = "The next day I woke up with the worst sore throat and felt sick overall, but I just kept going, thinking I would get better the next day. I developed bad vertigo, and also had fatigue and sleep problems. I went to the school health clinic and had a lot of tests done. All my tests came back fine— only months later I was found to have mononucleosis."
-# getting_data(text, ["sore throat", "sick", "vertigo", "fatigue", "sleep problems"])
+# text = "I have a headache and I was not very tired today"
+# getting_data(text, ["headache", "tired"])

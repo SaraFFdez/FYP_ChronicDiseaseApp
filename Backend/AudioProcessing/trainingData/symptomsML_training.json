@@ -4,18 +4,15 @@
         {
             "entities": [
                 [
-                    175, 
-                    184,
+                    175, 184,
                     "SYMPTOM"
                 ], 
                 [
-                    264, 
-                    285,
+                    264, 285,
                     "SYMPTOM"
                 ], 
                 [
-                    215,
-                    228,
+                    215, 228,
                     "SYMPTOM"
                 ]
             ]
@@ -26,38 +23,31 @@
         {
             "entities": [
                 [
-                    84,
-                    93,
+                    84, 93,
                     "SYMPTOM"
                 ], 
                 [
-                    95, 
-                    109,
+                    95, 109,
                     "SYMPTOM"
                 ], 
                 [
-                    231,
-                    245,
+                    231, 245,
                     "SYMPTOM"
                 ],
                 [
-                    247, 
-                    264,
+                    247, 264,
                     "SYMPTOM"
                 ],
                 [
-                    278, 
-                    287,
+                    278, 287,
                     "SYMPTOM"
                 ],
                 [
-                    289, 
-                    298,
+                    289, 298,
                     "SYMPTOM"
                 ],
                 [
-                    303, 
-                    321,
+                    303, 321,
                     "SYMPTOM"
                 ]
             ]
@@ -68,38 +58,66 @@
         {
             "entities": [
                 [
-                    97,
-                    100,
+                    97, 100,
                     "SYMPTOM"
                 ], 
                 [
-                    184,
-                    201,
+                    184, 201,
                     "SYMPTOM"
                 ], 
                 [
-                    163, 
-                    182,
+                    163, 182,
                     "SYMPTOM"
                 ],
                 [
-                    216, 
-                    225,
+                    216, 225,
                     "SYMPTOM"
                 ],
                 [
-                    203, 
-                    214,
+                    203, 214,
                     "SYMPTOM"
                 ],
                 [
-                    235, 
-                    240,
+                    235, 240,
                     "SYMPTOM"
                 ],
                 [
-                    252, 
-                    261,
+                    252, 261,
+                    "SYMPTOM"
+                ]
+            ]
+        }
+    ],
+    [
+        "It felt like I had a chronic case of the flu: exhaustion so great I could not move; headaches, dizziness, muscle aches, especially in my legs; and profound exhaustion and mental fogginess, so I could not function. I was sensitive to noise and light. I was amazed that I was so sick physically and yet doctors didn't know what to do.",
+        {
+            "entities": [
+                [
+                    46, 56,
+                    "SYMPTOM"
+                ], 
+                [
+                    84, 93,
+                    "SYMPTOM"
+                ], 
+                [
+                    95, 104,
+                    "SYMPTOM"
+                ],
+                [
+                    106, 118,
+                    "SYMPTOM"
+                ],
+                [
+                    156, 166,
+                    "SYMPTOM"
+                ],
+                [
+                    171, 187,
+                    "SYMPTOM"
+                ],
+                [
+                    277, 292,
                     "SYMPTOM"
                 ]
             ]
@@ -110,53 +128,144 @@
         {
             "entities": [
                 [
-                    158,
-                    165,
+                    158, 165,
                     "SYMPTOM"
                 ], 
                 [
-                    190,
-                    209,
+                    190, 209,
                     "SYMPTOM"
                 ], 
                 [
-                    211, 
-                    228,
+                    211, 228,
                     "SYMPTOM"
                 ], 
                 [
-                    230, 
-                    241,
+                    230, 241,
                     "SYMPTOM"
                 ], 
                 [
-                    243,
-                    252,
+                    243, 252,
                     "SYMPTOM"
                 ], 
                 [
-                    262,
-                    267,
+                    262, 267,
                     "SYMPTOM"
                 ],
                 [
-                    279,
-                    288,
+                    279, 288,
                     "SYMPTOM"
                 ],
                 [
-                    581,
-                    592,
+                    581, 592,
                     "SYMPTOM"
                 ],
                 [
-                    603,
-                    607,
+                    603, 607,
                     "SYMPTOM"
                 ],
                 [
-                    626,
-                    640,
+                    626, 640,
+                    "SYMPTOM"
+                ]
+            ]
+        }
+    ],
+    [
+        "I started to throw-up, had a sore throat, and was very tired.",
+        {
+            "entities": [
+                [
+                    13, 21,
+                    "SYMPTOM"
+                ], 
+                [
+                    29, 40,
+                    "SYMPTOM"
+                ], 
+                [
+                    55, 60,
+                    "SYMPTOM"
+                ]
+            ]
+        }
+    ],
+    [
+        "POTS, postural orthostatic tachycardia syndrome, is a change in the regulation of heart rate when going from lying down to standing. It causes light-headedness or dizziness and an abnormal increase in heart rate but the heart is normal. It is common for patients with these symptoms of ME/CFS who have been diagnosed with POTS to use this term.",
+        {
+            "entities": [ 
+                [
+                    6, 47,
+                    "SYMPTOM"
+                ], 
+                [
+                    143, 159,
+                    "SYMPTOM"
+                ], 
+                [
+                    163, 172,
+                    "SYMPTOM"
+                ], 
+                [
+                    189, 211,
+                    "SYMPTOM"
+                ]
+            ]
+        }
+    ],
+    [
+        "I had no energy, no stability, and started to have sleep problems. The symptoms did not go away after a few weeks so I went to an internist who I did not know. He sent me to a “shrink.” I saw a few internists and one psychiatrist who all said I was anxious and depressed. I felt demeaned by the doctors I saw.",
+        {
+            "entities": [
+                [
+                    6, 
+                    15,
+                    "SYMPTOM"
+                ], 
+                [
+                    51, 
+                    65,
+                    "SYMPTOM"
+                ], 
+                [
+                    249, 
+                    256,
+                    "SYMPTOM"
+                ],
+                [
+                    261, 
+                    270,
+                    "SYMPTOM"
+                ]
+            ]
+        }
+    ],
+    [
+        "The next day I woke up with the worst sore throat and felt sick overall, but I just kept going, thinking I would get better the next day. I developed bad vertigo, and also had fatigue and sleep problems. I went to the school health clinic and had a lot of tests done. All my tests came back fine— only months later I was found to have mononucleosis.",
+        {
+            "entities": [
+                [
+                    38, 
+                    49,
+                    "SYMPTOM"
+                ], 
+                [
+                    59,
+                    63,
+                    "SYMPTOM"
+                ], 
+                [
+                    154, 
+                    161,
+                    "SYMPTOM"
+                ],
+                [
+                    176, 
+                    183,
+                    "SYMPTOM"
+                ],
+                [
+                    188,
+                    202,
                     "SYMPTOM"
                 ]
             ]
