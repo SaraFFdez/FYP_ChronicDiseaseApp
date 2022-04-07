@@ -13,7 +13,11 @@
         "How can I get rid of my {}", 
         "I do not suffer from {} anymore",
         "I do not usually have {} or {}",
-        "The symptoms I had last week were {}"
-
-
+        "The symptoms I had last week were {}",
+        "My friend has been having {}", 
+        "The symptoms I have been feeling are: {}, {} and {}",
+        "These are some symptoms I did not have today: {} and {}",
+        "I felt these symptoms: {}, {} and {}",
+        "I had a bad {}",
+        "I suffer from {}"
     ]
