@@ -62,8 +62,9 @@ def test_model(text):
     for ents in doc.ents:
         print(ents.text, ents.label_)
 
-# test_text = "today I had a headache and a felt really tired. I also had joint pains and a fever"
-# test_model(test_text)
+#test_text = "I have a headache and I was not very tired today, but yesteday I had a toothache and vomited"
+test_text = "It felt like I had a chronic case of the flu: exhaustion so great I could not move; headaches, dizziness, muscle aches, especially in my legs; and profound exhaustion and mental fogginess, so I could not function. I was sensitive to noise and light. I was amazed that I was so sick physically and yet doctors didn't know what to do."
+test_model(test_text)
 
-# text = "I have a headache and I was not very tired today"
+#text = "I have a headache and I was not very tired today"
 # getting_data(text, ["headache", "tired"])
