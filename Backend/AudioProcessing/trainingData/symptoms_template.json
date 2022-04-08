@@ -6,7 +6,7 @@
         "Every day I feel {}, {} and {}",
         "I did not have {}",
         "I suffered from {} the other night",
-        "Two weeks ago I felt {}",
+        "Two weeks ago I felt {} and {}",
         "I have not had {} or {} in a long time",
         "I have not felt {} recently",
         "I wish I did not have a {}",
@@ -18,6 +18,8 @@
         "The symptoms I have been feeling are: {}, {} and {}",
         "These are some symptoms I did not have today: {} and {}",
         "I felt these symptoms: {}, {} and {}",
+        "I did not have {}, {} and {} the other week",
+        "The suffer from {}, {} and {}",
         "I had a bad {}",
         "I suffer from {}"
     ]
