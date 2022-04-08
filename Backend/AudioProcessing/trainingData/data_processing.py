@@ -165,5 +165,5 @@ def create_data_sets(symptoms,sentence_limit = 167):
 symptoms = pd.read_json(training_path + "symptoms_data.json", typ="series") 
 
 TRAIN_DATA, TEST_DATA = create_data_sets(symptoms, 10)
-TRAIN_DATA = TRAIN_DATA + load_data(training_path + "symptomsML_training.json")
+#TRAIN_DATA = TRAIN_DATA + load_data(training_path + "symptomsML_training.json")
 save_spacy_format(TRAIN_DATA, TEST_DATA)
