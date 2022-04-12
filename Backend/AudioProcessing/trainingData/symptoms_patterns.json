@@ -86,6 +86,11 @@
     },
     {
         "label": "SYMPTOM",
+        "pattern": [{"LEMMA": "fatigued"}],
+        "id": "fatigue"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": "tiredness",
         "id": "tiredness"
     },

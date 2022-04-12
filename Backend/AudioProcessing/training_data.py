@@ -6,15 +6,7 @@ import spacy
 import re
 from spacy.tokens import DocBin
 from tqdm import tqdm
-
-def load_data(file):
-    with open(file, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    return (data)
-
-def save_data(file, data):
-    with open (file, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4)
+import helpers
 
 def getting_data(text, array_of_symptoms):
     for symptom in array_of_symptoms:
@@ -39,7 +31,7 @@ def change_data_to_v3(TRAIN_DATA):
     return db
 
 def save_spacy_format():
-    TRAIN_DATA = load_data("Backend\\AudioProcessing\\trainingData\\symptomsML_training.json")
+    TRAIN_DATA = helpers.load_data("Backend\\AudioProcessing\\trainingData\\symptomsML_training.json")
     data_split_val = 0.3
     VALIDATION_DATA = [] 
     for i in range(0,int(len(TRAIN_DATA)*data_split_val)):

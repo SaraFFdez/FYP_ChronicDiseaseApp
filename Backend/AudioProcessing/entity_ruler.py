@@ -1,22 +1,13 @@
 import spacy
-import json
-
-def load_data(file):
-    with open(file, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    return (data)
-
-def save_data(file, data):
-    with open (file, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4)
+import helpers
 
 def create_training_data(data, type):
     patterns = []
     for item in data:
         pattern = {
             "label": type,
-            "pattern": item ,
-            "id": item   
+            "pattern": item 
+            #"id": item   
         }
         patterns.append(pattern)
     return patterns
@@ -25,18 +16,21 @@ test_text_Sukhi = "So today I woke up with a really intense headache where I jus
 
 nlp = spacy.load("en_core_web_sm")
 config = {
-   "phrase_matcher_attr": None,
+   "phrase_matcher_attr": "LOWER",
    "validate": True,
    "overwrite_ents": False,
    "ent_id_sep": "||",
 }
 ruler = nlp.add_pipe("entity_ruler", config=config, after="ner")
 
-# symptoms_data = load_data("Backend\\AudioProcessing\\trainingData\\symptoms_data.json")
-# patterns = create_training_data(symptoms_data, "SYMPTOM")
-patterns = load_data("Backend\\AudioProcessing\\trainingData\\symptoms_patterns2.json")
+# symptoms_data = helpers.load_data("Backend\\AudioProcessing\\trainingData\\symptoms_data.json")
+# patterns_old = create_training_data(symptoms_data, "SYMPTOM")
+#print("Patterns old", patterns_old)
+patterns = helpers.load_data("Backend\\AudioProcessing\\trainingData\\symptoms_patterns.json")
+
 
 ruler.add_patterns(patterns)
+#ruler.to_disk("Backend\\AudioProcessing\\trained_algorithms\\entity_ruler")
 doc = nlp(test_text_Sukhi)
 for ent in doc.ents:
     print (ent.text, ent.label_)
