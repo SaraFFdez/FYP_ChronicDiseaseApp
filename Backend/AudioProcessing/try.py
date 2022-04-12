@@ -8,6 +8,5 @@ doc2 = nlp("fatigued")
 for token in doc2:
     if token.text == "fatigued":
         print(token.text, token.lemma_)
-for token in doc1:
-    if token.text == "fatigued":
-        print(token.text, token.lemma_)
+for ents in doc1.ents:
+    print(ents.text, ents.ent_id_)
