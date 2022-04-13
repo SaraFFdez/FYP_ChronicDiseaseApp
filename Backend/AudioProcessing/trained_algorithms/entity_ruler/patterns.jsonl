@@ -2,7 +2,11 @@
 {"label":"SYMPTOM","pattern":[{"LEMMA":"head"},{"LEMMA":"pain"}],"id":"headache"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"head"},{"LEMMA":"hurt"}],"id":"headache"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"muscle"},{"LEMMA":"ache"}],"id":"muscle pain"}
-{"label":"SYMPTOM","pattern":[{"LEMMA":"memory"},{"LEMMA":"problems"}],"id":"brain fog"}
+{"label":"SYMPTOM","pattern":[{"POS":"NOUN"},{"POS":"SCONJ","OP":"*"},{"LEMMA":"think"}],"id":"brain fog"}
+{"label":"SYMPTOM","pattern":[{"POS":"NOUN"},{"POS":"SCONJ","OP":"*"},{"LEMMA":"remember"}],"id":"brain fog"}
+{"label":"SYMPTOM","pattern":[{"LEMMA":"memory"},{"POS":"NOUN"}],"id":"brain fog"}
+{"label":"SYMPTOM","pattern":[{"POS":"NOUN"},{"LEMMA":"concentrate"}],"id":"brain fog"}
+{"label":"SYMPTOM","pattern":[{"LEMMA":"cognitive"},{"POS":"NOUN"}],"id":"brain fog"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"tired"}],"id":"tiredness"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"fatigue"}],"id":"fatigue"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"fatigued"}],"id":"fatigue"}
@@ -27,15 +31,13 @@
 {"label":"SYMPTOM","pattern":[{"LEMMA":"light"},{"LEMMA":"sensitivity"}],"id":"sensitivity"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"sensitive"},{"POS":"ADP","OP":"*"},{"POS":"NOUN"}],"id":"sensitivity"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"sensitivity"},{"POS":"ADP","OP":"*"},{"POS":"NOUN"}],"id":"sensitivity"}
+{"label":"SYMPTOM","pattern":[{"LEMMA":"vomiting"}],"id":"vomiting"}
+{"label":"SYMPTOM","pattern":[{"LEMMA":"vomit"}],"id":"vomiting"}
+{"label":"SYMPTOM","pattern":[{"LEMMA":"throw"},{"LEMMA":"up"}],"id":"vomiting"}
 {"label":"SYMPTOM","pattern":"dizziness","id":"dizziness"}
 {"label":"SYMPTOM","pattern":"dizzy","id":"dizziness"}
 {"label":"SYMPTOM","pattern":"mental fogginess","id":"brain fog"}
 {"label":"SYMPTOM","pattern":"brain fog","id":"brain fog"}
-{"label":"SYMPTOM","pattern":"trouble thinking","id":"brain fog"}
-{"label":"SYMPTOM","pattern":"trouble remembering","id":"brain fog"}
-{"label":"SYMPTOM","pattern":"trouble concentrating","id":"brain fog"}
-{"label":"SYMPTOM","pattern":"difficulty thinking","id":"brain fog"}
-{"label":"SYMPTOM","pattern":"cognitive problems","id":"brain fog"}
 {"label":"SYMPTOM","pattern":"poor concentration","id":"brain fog"}
 {"label":"SYMPTOM","pattern":"forgetfullness","id":"brain fog"}
 {"label":"SYMPTOM","pattern":"Inability to focus","id":"brain fog"}
@@ -68,6 +70,8 @@
 {"label":"SYMPTOM","pattern":"Joint stiffness","id":"Joint stiffness"}
 {"label":"SYMPTOM","pattern":"nausea","id":"nausea"}
 {"label":"SYMPTOM","pattern":"anxiety","id":"anxiety"}
+{"label":"SYMPTOM","pattern":"anxious","id":"anxiety"}
+{"label":"SYMPTOM","pattern":"vertigo","id":"vertigo"}
 {"label":"SYMPTOM","pattern":"stomach cramps","id":"stomach cramps"}
 {"label":"SYMPTOM","pattern":"lightheadedness","id":"lightheadedness"}
 {"label":"SYMPTOM","pattern":"low energy","id":"low energy"}
@@ -79,6 +83,7 @@
 {"label":"SYMPTOM","pattern":"migraine","id":"migraine"}
 {"label":"SYMPTOM","pattern":"stress","id":"stress"}
 {"label":"SYMPTOM","pattern":"depression","id":"depression"}
+{"label":"SYMPTOM","pattern":"depressed","id":"depression"}
 {"label":"SYMPTOM","pattern":"sore joints","id":"sore joints"}
 {"label":"SYMPTOM","pattern":"menstrual cramps","id":"menstrual cramps"}
 {"label":"SYMPTOM","pattern":"dry skin","id":"dry skin"}
@@ -92,7 +97,6 @@
 {"label":"SYMPTOM","pattern":"itching","id":"itching"}
 {"label":"SYMPTOM","pattern":"sneezing","id":"sneezing"}
 {"label":"SYMPTOM","pattern":"indigestion","id":"indigestion"}
-{"label":"SYMPTOM","pattern":"vomiting","id":"vomiting"}
 {"label":"SYMPTOM","pattern":"low libido","id":"low libido"}
 {"label":"SYMPTOM","pattern":"nightmares","id":"nightmares"}
 {"label":"SYMPTOM","pattern":"frustrated","id":"frustrated"}

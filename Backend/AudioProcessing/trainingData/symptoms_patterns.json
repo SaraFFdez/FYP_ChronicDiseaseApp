@@ -41,32 +41,27 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "trouble thinking",
+        "pattern": [{"POS": "NOUN"}, {"POS": "SCONJ", "OP": "*"}, {"LEMMA": "think"}],
         "id": "brain fog"
     },
     {
         "label": "SYMPTOM",
-        "pattern": "trouble remembering",
+        "pattern": [{"POS": "NOUN"}, {"POS": "SCONJ", "OP": "*"}, {"LEMMA": "remember"}],
         "id": "brain fog"
     },
     {
         "label": "SYMPTOM",
-        "pattern": [{"LEMMA": "memory"}, {"LEMMA": "problems"}],
+        "pattern": [{"LEMMA": "memory"}, {"POS": "NOUN"}],
         "id": "brain fog"
     },
     {
         "label": "SYMPTOM",
-        "pattern": "trouble concentrating",
+        "pattern": [{"POS": "NOUN"}, {"LEMMA": "concentrate"}],
         "id": "brain fog"
     },
     {
         "label": "SYMPTOM",
-        "pattern": "difficulty thinking",
-        "id": "brain fog"
-    },
-    {
-        "label": "SYMPTOM",
-        "pattern": "cognitive problems",
+        "pattern": [{"LEMMA": "cognitive"}, {"POS": "NOUN"}],
         "id": "brain fog"
     },
     {
@@ -306,6 +301,16 @@
     },
     {
         "label": "SYMPTOM",
+        "pattern": "vertigo",
+        "id": "vertigo"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "anxious",
+        "id": "anxiety"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": "stomach cramps",
         "id": "stomach cramps"
     },
@@ -381,6 +386,11 @@
     },
     {
         "label": "SYMPTOM",
+        "pattern": "depressed",
+        "id": "depression"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": "sore joints",
         "id": "sore joints"
     },
@@ -446,7 +456,17 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "vomiting",
+        "pattern": [{"LEMMA": "vomiting"}],
+        "id": "vomiting"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": [{"LEMMA": "vomit"}],
+        "id": "vomiting"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": [{"LEMMA": "throw"}, {"LEMMA": "up"}],
         "id": "vomiting"
     },
     {
