@@ -106,6 +106,11 @@
     },
     {
         "label": "SYMPTOM",
+        "pattern": "sore throat",
+        "id": "sore throat"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": [{"LEMMA": "throat"}, {"LEMMA": "pain"}],
         "id": "sore throat"
     },
@@ -131,7 +136,12 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "sleep problems",
+        "pattern": [{"LEMMA": "sleep"}, {"LEMMA": "problem"}],
+        "id": "sleep problems"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "struggle to sleep",
         "id": "sleep problems"
     },
     {
@@ -143,6 +153,11 @@
         "label": "SYMPTOM",
         "pattern": "unrefreshing sleep",
         "id": "sleep problems"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "stuffed nose",
+        "id": "stuffed nose"
     },
     {
         "label": "SYMPTOM",
@@ -221,23 +236,38 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": [{"LEMMA": "joint"}, {"LEMMA": "pain"}],
-        "id": "joint pain"
+        "pattern": [{"POS": "NOUN"}, {"LEMMA": "pain"}],
+        "id": "noun_pain"
     },
     {
         "label": "SYMPTOM",
-        "pattern": [{"LEMMA": "pain"}, {"LEMMA": "joint"}],
-        "id": "joint pain"
+        "pattern": [{"LEMMA": "painful"},{"POS": "NOUN"}],
+        "id": "noun_pain"
     },
     {
         "label": "SYMPTOM",
-        "pattern": [{"LEMMA": "muscle"}, {"LEMMA": "pain"}],
-        "id": "muscle pain"
+        "pattern": [{"POS": "NOUN"}, {"POS": "ADV", "OP": "*"}, {"POS": "VERB", "OP": "*"}, {"POS": "PART", "OP": "*"}, {"LEMMA": "hurt"}],
+        "id": "noun_pain"
     },
     {
         "label": "SYMPTOM",
-        "pattern": [{"LEMMA": "pain"}, {"POS": "ADP", "OP": "*"}, {"LEMMA": "muscle"}],
-        "id": "muscle pain"
+        "pattern": [{"LEMMA": "pain"}, {"POS": "ADP", "OP": "*"}, {"POS": "DET", "OP": "*"}, {"POS": "ADJ", "OP": "*"}, {"POS": "NOUN"}],
+        "id": "pain_noun"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": [{"LEMMA": "pain"}, {"POS": "ADP", "OP": "*"}, {"POS": "PRON", "OP": "*"}, {"POS": "ADJ", "OP": "*"}, {"POS": "NOUN"}],
+        "id": "pain_noun"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": [{"LEMMA": "pain"}, {"POS": "SCONJ", "OP": "*"}, {"POS": "VERB"}, {"POS": "ADP", "OP": "*"}, {"POS": "DET", "OP": "*"}, {"POS": "NOUN", "OP": "*"}],
+        "id": "pain_verb"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": [{"LEMMA": "pain"}, {"POS": "SCONJ"}, {"POS": "NOUN"}],
+        "id": "pain_verb"
     },
     {
         "label": "SYMPTOM",
@@ -261,11 +291,6 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "pain",
-        "id": "pain"
-    },
-    {
-        "label": "SYMPTOM",
         "pattern": "Joint stiffness",
         "id": "Joint stiffness"
     },
@@ -286,43 +311,28 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "pelvic pain",
-        "id": "pelvic pain"
-    },
-    {
-        "label": "SYMPTOM",
         "pattern": "lightheadedness",
         "id": "lightheadedness"
     },
     {
         "label": "SYMPTOM",
-        "pattern": "eye pain",
-        "id": "eye pain"
+        "pattern": [{"POS": "NOUN"}, {"LEMMA": "sensitivity"}],
+        "id": "sensitivity"
     },
     {
         "label": "SYMPTOM",
-        "pattern": "light sensitivity",
-        "id": "light sensitivity"
+        "pattern": [{"LEMMA": "light"}, {"LEMMA": "sensitivity"}],
+        "id": "sensitivity"
     },
     {
         "label": "SYMPTOM",
-        "pattern": "sound sensitivity",
-        "id": "sound sensitivity"
+        "pattern": [{"LEMMA": "sensitive"}, {"POS": "ADP", "OP": "*"}, {"POS": "NOUN"}],
+        "id": "sensitivity"
     },
     {
         "label": "SYMPTOM",
-        "pattern": "knee pain",
-        "id": "knee pain"
-    },
-    {
-        "label": "SYMPTOM",
-        "pattern": "lower back pain",
-        "id": "lower back pain"
-    },
-    {
-        "label": "SYMPTOM",
-        "pattern": "hip pain",
-        "id": "hip pain"
+        "pattern": [{"LEMMA": "sensitivity"}, {"POS": "ADP", "OP": "*"}, {"POS": "NOUN"}],
+        "id": "sensitivity"
     },
     {
         "label": "SYMPTOM",
@@ -353,11 +363,6 @@
         "label": "SYMPTOM",
         "pattern": "feet swelling",
         "id": "feet swelling"
-    },
-    {
-        "label": "SYMPTOM",
-        "pattern": "ankle pain",
-        "id": "ankle pain"
     },
     {
         "label": "SYMPTOM",
@@ -394,7 +399,6 @@
         "pattern": "cough",
         "id": "cough"
     },
-
     {
         "label": "SYMPTOM",
         "pattern": "vaginal itching",
@@ -467,11 +471,6 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "chest pain",
-        "id": "chest pain"
-    },
-    {
-        "label": "SYMPTOM",
         "pattern": "heartburn",
         "id": "heartburn"
     },
@@ -497,11 +496,6 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "pain when peeing",
-        "id": "pain when peeing"
-    },
-    {
-        "label": "SYMPTOM",
         "pattern": "Inability to focus",
         "id": "brain fog"
     },
@@ -518,7 +512,7 @@
     {
         "label": "SYMPTOM",
         "pattern": "sleepiness",
-        "id": "sleepiness"
+        "id": "tiredness"
     },
     {
         "label": "SYMPTOM",

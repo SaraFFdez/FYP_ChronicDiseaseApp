@@ -25,21 +25,56 @@ def save_entity_ruler():
     # patterns_old = create_training_data(symptoms_data, "SYMPTOM")
     patterns = helpers.load_data("Backend\\AudioProcessing\\trainingData\\symptoms_patterns.json")
     ruler.add_patterns(patterns)
-    #ruler.to_disk("Backend\\AudioProcessing\\trained_algorithms\\entity_ruler")
+    ruler.to_disk("Backend\\AudioProcessing\\trained_algorithms\\entity_ruler")
 
 def symptoms_identifier(text):
     nlp = spacy.load("en_core_web_sm") #load pretrained nlp model
     ruler = nlp.add_pipe("entity_ruler", after="ner") #create entity ruler
-    ruler.from_disk("Backend\\AudioProcessing\\trained_algorithms\\entity_ruler")
+    ruler.from_disk("Backend\\AudioProcessing\\trained_algorithms\\entity_ruler") #load entity ruler
     doc = nlp(text)
     symptoms_found_id = []
+
     for ent in doc.ents:
-        print (ent.text, ent.label_, ent.ent_id_)
+        print (ent.text, ent.label_, ent.ent_id_) #delete later
         if ent.label_ == "SYMPTOM":
-            if ent.ent_id_ not in symptoms_found_id:
-                symptoms_found_id.append(ent.ent_id_)   
+            if ent.ent_id_ == "pain_noun" or ent.ent_id_ == "pain_verb" or ent.ent_id_ == "noun_pain":
+                symptomID = pain_pattern_handler(ent)
+            elif ent.ent_id_ == "sensitivity":
+                symptomID = sensitivity_pattern_handler(ent)
+            else:
+                symptomID = ent.ent_id_
+
+            if symptomID != "Error" and symptomID not in symptoms_found_id:
+                symptoms_found_id.append(symptomID)   
+
     return symptoms_found_id
 
-test_text_Sukhi = "So today I woke up with a really intense headache where I just had really bad sensitivity to light and I just really felt like I was physically too fatigued to move. So I stayed in bed for about and extra hour today and an hour more than usual. So that brings my total sleep from eight to 9 hours. So roughly about 9 hours of sleep. Other symptoms include I've noticed my allergies a little bit today, so it just kind of stuff. He knows, maybe feeling a little bit ill, but that could just be from my allergies. So I'm not too sure in regards to meals, I just had some eggs in the morning, I had a smoothie and I drank water and I've just now recently had a coffee and for dinner or I'm going to have some chicken. In regards to activities, so I just sort of walked around my bike to work today, which is really good. So that's about five kilometres and I didn't think I'd be able to do that given how tired it was when I woke up and I don't think I have the energy to bike home, so I'm just going to walk to the train station and home. So Yeah."
-print("LIST OF SYMPTOMS", symptoms_identifier(test_text_Sukhi))
+def pain_pattern_handler(ent):
+    if ent.ent_id_ == "pain_noun" or ent.ent_id_ == "noun_pain":
+        for word in ent:
+            if word.pos_ == "NOUN" and word.lower_ != "pain":
+                return word.text + " pain"
+    elif ent.ent_id_ == "pain_verb":
+        for word in ent:
+            if word.pos_ == "NOUN" and word.lower_ != "pain":
+                return "pain during " + word.text
+        for word in ent:
+            if word.pos_ == "VERB":
+                return "pain " + word.text  
+    return "Error"
 
+def sensitivity_pattern_handler(ent):
+    for word in ent:
+        if word.pos_ == "NOUN" and word.lower_ != "sensitivity":
+            return word.text + " sensitivity" 
+    for word in ent:
+        if word.lower_ != "sensitivity":
+            return word.text + " sensitivity"
+    return "unidentified sensitivity"
+
+for i in range(0,5):
+    text = helpers.audio_tests(i)
+    print(text)
+    print("LIST OF SYMPTOMS", symptoms_identifier(text))
+
+#save_entity_ruler()
