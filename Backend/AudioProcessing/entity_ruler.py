@@ -1,17 +1,6 @@
 import spacy
 import helpers
 
-def create_training_data(data, type):
-    patterns = []
-    for item in data:
-        pattern = {
-            "label": type,
-            "pattern": item 
-            #"id": item   
-        }
-        patterns.append(pattern)
-    return patterns
-
 def save_entity_ruler():
     nlp = spacy.load("en_core_web_sm")
     config = {
@@ -21,8 +10,6 @@ def save_entity_ruler():
         "ent_id_sep": "||",
     }
     ruler = nlp.add_pipe("entity_ruler", config=config, after="ner")
-    # symptoms_data = helpers.load_data("Backend\\AudioProcessing\\trainingData\\symptoms_data.json")
-    # patterns_old = create_training_data(symptoms_data, "SYMPTOM")
     patterns = helpers.load_data("Backend\\AudioProcessing\\trainingData\\symptoms_patterns.json")
     ruler.add_patterns(patterns)
     ruler.to_disk("Backend\\AudioProcessing\\trained_algorithms\\entity_ruler")
@@ -34,7 +21,7 @@ def symptoms_identifier(text):
     doc = nlp(text)
     symptoms_found_id = []
 
-    for ent in doc.ents:
+    for ent in doc.ents: #find symptoms entities and add them to a list if they are not repeated.
         print (ent.text, ent.label_, ent.ent_id_) #delete later
         if ent.label_ == "SYMPTOM":
             if ent.ent_id_ == "pain_noun" or ent.ent_id_ == "pain_verb" or ent.ent_id_ == "noun_pain":
