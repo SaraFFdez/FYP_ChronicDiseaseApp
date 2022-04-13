@@ -63,8 +63,5 @@ def sensitivity_pattern_handler(ent):
 #     text = helpers.audio_tests(i)
 #     print(text)
 #     print("LIST OF SYMPTOMS", symptoms_identifier(text))
-text =  "The next day I woke up with the worst sore throat and felt sick overall, but I just kept going, thinking I would get better the next day. I developed bad vertigo, and also had fatigue and sleep problems. I went to the school health clinic and had a lot of tests done. All my tests came back fine— only months later I was found to have mononucleosis."
-print(text)
-print("LIST OF SYMPTOMS", symptoms_identifier(text))
 
 #save_entity_ruler()
