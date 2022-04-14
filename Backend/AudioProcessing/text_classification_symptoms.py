@@ -9,16 +9,13 @@ import numpy as np
 
 def train_classif_symptoms_model(training_data_path = "Backend\\AudioProcessing\\trainingData\\text_classification_symptoms.json"):
     output_dir = 'Backend\\AudioProcessing\\trained_algorithms\\ML\\symptoms_classif_model'
-    
     # bow
     config = Config().from_str(single_label_bow_config)
     TRAINING_DATA = helpers.load_data(training_data_path)
-
     # initialize a blank model
     nlp = spacy.blank("en")
     # categorizer pipeline
     category = nlp.add_pipe("textcat", last=True, config=config)
-
     category.add_label("POSITIVE")
     category.add_label("NEGATIVE")
 
@@ -29,7 +26,6 @@ def train_classif_symptoms_model(training_data_path = "Backend\\AudioProcessing\
         # Shuffle the training data
         random.shuffle(TRAINING_DATA)
         losses = {}
-
         # Do minibatch training
         for batch in spacy.util.minibatch(TRAINING_DATA, size=4):
             texts = [nlp.make_doc(text) for text, entities in batch]
@@ -54,5 +50,5 @@ def test_classif_symptoms_model(output_dir = 'Backend\\AudioProcessing\\trained_
         print(doc.cats)
         #print(doc.cats[max_confidence_label])
 
-train_classif_symptoms_model()
+#train_classif_symptoms_model()
 #test_classif_symptoms_model()
