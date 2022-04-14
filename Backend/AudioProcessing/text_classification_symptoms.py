@@ -54,5 +54,5 @@ def test_classif_symptoms_model(output_dir = 'Backend\\AudioProcessing\\trained_
         print(doc.cats)
         #print(doc.cats[max_confidence_label])
 
-#train_classif_symptoms_model()
-test_classif_symptoms_model()
+train_classif_symptoms_model()
+#test_classif_symptoms_model()

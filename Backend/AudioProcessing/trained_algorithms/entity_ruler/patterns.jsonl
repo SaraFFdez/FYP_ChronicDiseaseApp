@@ -13,6 +13,7 @@
 {"label":"SYMPTOM","pattern":[{"LEMMA":"throat"},{"LEMMA":"pain"}],"id":"sore throat"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"throat"},{"LEMMA":"hurts"}],"id":"sore throat"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"issue"},{"LEMMA":"sleep"}],"id":"sleep problems"}
+{"label":"SYMPTOM","pattern":[{"LEMMA":"trouble"},{"LEMMA":"sleep"}],"id":"sleep problems"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"problem"},{"LEMMA":"sleep"}],"id":"sleep problems"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"sleep"},{"LEMMA":"problem"}],"id":"sleep problems"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"weak"}],"id":"weakness"}

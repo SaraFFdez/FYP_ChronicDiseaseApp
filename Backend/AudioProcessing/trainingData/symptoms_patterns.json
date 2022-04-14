@@ -126,6 +126,11 @@
     },
     {
         "label": "SYMPTOM",
+        "pattern": [{"LEMMA": "trouble"}, {"LEMMA": "sleep"}],
+        "id": "sleep problems"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": [{"LEMMA": "problem"}, {"LEMMA": "sleep"}],
         "id": "sleep problems"
     },
