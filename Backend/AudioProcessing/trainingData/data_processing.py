@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 from spacy.tokens import DocBin
 from tqdm import tqdm
 
-
 training_path = "Backend\\AudioProcessing\\trainingData\\"
 
 def load_data(file):
@@ -20,7 +19,6 @@ def load_data(file):
 def change_data_to_v3(TRAIN_DATA):
     nlp = spacy.blank("en") # load a new spacy model
     db = DocBin() # create a DocBin object
-
     for text, annot, in tqdm(TRAIN_DATA): # data in previous format
         doc = nlp.make_doc(text) # create doc object from text
         ents = []
@@ -37,8 +35,8 @@ def change_data_to_v3(TRAIN_DATA):
 def save_spacy_format(TRAIN_DATA, VALIDATION_DATA):
     symptoms_train = change_data_to_v3(TRAIN_DATA)
     symptoms_validate = change_data_to_v3(VALIDATION_DATA)
-    symptoms_train.to_disk("Backend\\AudioProcessing\\trainingData\\symptomsML_training.spacy")
-    symptoms_validate.to_disk("Backend\\AudioProcessing\\trainingData\\symptomsML_validate.spacy")
+    symptoms_train.to_disk("Backend\\AudioProcessing\\trainingData\\foodML_training.spacy")
+    symptoms_validate.to_disk("Backend\\AudioProcessing\\trainingData\\foodML_testing.spacy")
 
 def get_cvs_data_symptoms():
 #load the file of medical information and clean it
@@ -161,9 +159,12 @@ def create_data_sets(symptoms,sentence_limit = 167):
     
     return TRAIN_DATA, TEST_DATA
 
-#symptoms = get_cvs_data_symptoms()
-symptoms = pd.read_json(training_path + "symptoms_data.json", typ="series") 
+food = get_cvs_data_symptoms()
+#symptoms = pd.read_json(training_path + "symptoms_data.json", typ="series") 
 
-TRAIN_DATA, TEST_DATA = create_data_sets(symptoms, 10)
-TRAIN_DATA = TRAIN_DATA + load_data(training_path + "symptomsML_training.json")
+TRAIN_DATA, TEST_DATA = create_data_sets(food, 165)
+
 save_spacy_format(TRAIN_DATA, TEST_DATA)
+
+#train!
+# py -m spacy train Backend\\AudioProcessing\\trainingData\\config_SympNER.cfg --output Backend\\AudioProcessing\\trained_algorithms\\ML\\food_NER_ML --paths.train Backend\\AudioProcessing\\trainingData\\foodML_training.spacy --paths.dev Backend\\AudioProcessing\\trainingData\\foodML_testing.spacy

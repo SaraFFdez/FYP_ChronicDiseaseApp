@@ -1,3 +1,4 @@
+from curses import nl
 import os
 import sys
 import json
@@ -13,14 +14,17 @@ def trials(input_text):
     #tokenised_text = nltk.pos_tag(text)
 
 def textProcessing(text):
-    print("We will process our text here! " + text)
+    print("We will process our text here! " + text) #possibly the " but " to ". "
 
 
 def symptomsList(text):
     symptoms_identifier(text)
 
 def dietRecord(text):
-    print("We will get the table for the diet from the " + text)
+    nlpFood = spacy.load("Backend\\AudioProcessing\\trained_algorithms\\ML\\food_NER_ML")
+    doc = nlpFood(text)
+    for ent in doc.ents:
+        print (ent, ent.label_)
     return 
 
 def activityLog(text):
