@@ -128,3 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 Backend/AudioProcessing/trainingData/medicalData.csv
+Backend/AudioProcessing/trainingData/food.csv
+Backend/AudioProcessing/trainingData/base_food_config.cfg
+Backend/AudioProcessing/trainingData/foodML_testing.spacy
+Backend/AudioProcessing/trainingData/foodML_training.spacy
