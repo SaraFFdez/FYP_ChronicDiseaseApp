@@ -5,6 +5,7 @@ import json
 import spacy
 from spacy.util import minibatch, compounding
 import warnings
+import en_core_web_md
 import matplotlib.pyplot as plt
 from spacy.tokens import DocBin
 from tqdm import tqdm
@@ -241,12 +242,82 @@ def create_data_sets_food(foods ,sentence_limit = 167):
     
     return TRAIN_DATA, TEST_DATA
 
+def get_revision_data():
+    npr_df = pd.read_csv(training_path + "npr.csv")
+    print("data loaded")
+    # print row and column information
+    print(npr_df.head())
+    # create an nlp object as we'll use this to seperate the sentences and identify existing entities
+    nlp = en_core_web_md.load()
+    revision_texts = []
+    print("nlp loaded")
+    #counter = 0
+    # convert the articles to spacy objects to better identify the sentences. Disabled unneeded components. # takes ~ 4 minutes
+    for doc in nlp.pipe(npr_df["Article"][:5000], batch_size=30, disable=["tagger","ner"]): #
+        #print("looking at article", counter)
+        #counter = counter + 1
+        for sentence in doc.sents:
+
+            if  40 < len(sentence.text) < 80:
+                # some of the sentences had excessive whitespace in between words, so we're trimming that
+                revision_texts.append(" ".join(re.split("\s+", sentence.text, flags=re.UNICODE)))
+    revisions = []
+    # Use the existing spaCy model to predict the entities, then append them to revision
+    for doc in nlp.pipe(revision_texts, batch_size=50, disable=["tagger", "parser"]):
+        # don't append sentences that have no entities
+        if len(doc.ents) > 0:
+            revisions.append((doc.text, {"entities": [(e.start_char, e.end_char, e.label_) for e in doc.ents]}))
+    TRAIN_REVISION_DATA = []
+    TEST_REVISION_DATA = []
+    print("start training data")
+    # create dictionaries to keep count of the different entities
+    TRAIN_ENTITY_COUNTER = {}
+    TEST_ENTITY_COUNTER = {}
+
+    # This will help distribute the entities (i.e. we don't want 1000 PERSON entities, but only 80 ORG entities)
+    REVISION_SENTENCE_SOFT_LIMIT = 100
+
+    # helper function for incrementing the revision counters
+    def increment_revision_counters(entity_counter, entities):
+        for entity in entities:
+            label = entity[2]
+            if label in entity_counter:
+                entity_counter[label] += 1
+            else:
+                entity_counter[label] = 1
+
+    random.shuffle(revisions)
+    print("starting revisions")
+    for revision in revisions:
+        # get the entities from the revision sentence
+        entities = revision[1]["entities"]
+
+        # simple hack to make sure spaCy entities don't get too one-sided
+        should_append_to_train_counter = 0
+        for _, _, label in entities:
+            if label in TRAIN_ENTITY_COUNTER and TRAIN_ENTITY_COUNTER[label] > REVISION_SENTENCE_SOFT_LIMIT:
+                should_append_to_train_counter -= 1
+            else:
+                should_append_to_train_counter += 1
+
+        # simple switch for deciding whether to append to train data or test data
+        if should_append_to_train_counter >= 0:
+            TRAIN_REVISION_DATA.append(revision)
+            increment_revision_counters(TRAIN_ENTITY_COUNTER, entities)
+        else:
+            TEST_REVISION_DATA.append(revision)
+            increment_revision_counters(TEST_ENTITY_COUNTER, entities)
+    
+    return TRAIN_REVISION_DATA, TEST_REVISION_DATA
+
 #symptoms = get_cvs_data_symptoms()
 #symptoms = pd.read_json(training_path + "symptoms_data.json", typ="series") 
 #TRAIN_DATA, TEST_DATA = create_data_sets_symptoms(symptoms, 165)
 foods = get_cvs_data_food()
 TRAIN_DATA, TEST_DATA = create_data_sets_food(foods)
-save_spacy_format(TRAIN_DATA, TEST_DATA)
+TRAIN_DATA_REVISION, TEST_DATA_REVISION = get_revision_data()
+save_spacy_format(TRAIN_DATA + TRAIN_DATA_REVISION, TEST_DATA + TEST_DATA_REVISION)
 
 #train!
 # py -m spacy train Backend\\AudioProcessing\\trainingData\\food_config.cfg --output Backend\\AudioProcessing\\trained_algorithms\\ML\\food_NER_ML --paths.train Backend\\AudioProcessing\\trainingData\\foodML_training.spacy --paths.dev Backend\\AudioProcessing\\trainingData\\foodML_testing.spacy
+#py -m spacy train Backend\\AudioProcessing\\trainingData\\food_config_acc.cfg --output Backend\\AudioProcessing\\trained_algorithms\\ML\\food_NER_ML --paths.train Backend\\AudioProcessing\\trainingData\\foodML_training.spacy --paths.dev Backend\\AudioProcessing\\trainingData\\foodML_testing.spacy

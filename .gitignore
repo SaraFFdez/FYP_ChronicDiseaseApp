@@ -132,3 +132,4 @@ Backend/AudioProcessing/trainingData/food.csv
 Backend/AudioProcessing/trainingData/base_food_config.cfg
 Backend/AudioProcessing/trainingData/foodML_testing.spacy
 Backend/AudioProcessing/trainingData/foodML_training.spacy
+Backend/AudioProcessing/trainingData/npr.csv
