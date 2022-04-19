@@ -24,9 +24,13 @@
         "I had a bowl of {} with {} and I wanted to go to the mall today",
         "I brought a basket of {} for breakfast this morning",
         "I had a bowl of {}",
+        "Tonight I am going to have {}",
+        "For dinner I will eat {}",
+        "In the evening I will have {} and {}",
+        "Later I am going to eat {} and {}",
         "I ate a {} with {} in the morning",
         "I made a bowl of {} for my breakfast",
-        "There's {} for breakfast in the bowl this morning",
+        "There's {} for breakfast in the bowl",
         "This morning, I made a bowl of {}",
         "I decided to have some {} as a little bonus",
         "I decided to enjoy some {}",
@@ -38,5 +42,8 @@
         "I tasted some {}, {} and {} at the office",
         "There's a basket of {}, {} and {} that I consumed",
         "I devoured a {}, {} and {}",
+        "I had three {} for breakfast",
+        "I had a {}, a {} and two {} this morning",
+        "In the morning I had {} and {}",
         "I've already had a bag of {}, {} and {} from the fridge"
     ]

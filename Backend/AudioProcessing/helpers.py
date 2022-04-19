@@ -36,6 +36,9 @@ def audio_tests(num):
     limitTesting = "I had a headache but I did not have any vomiting today."
     negationTry2 = "I have nausea and this morning I had trouble sleeping and my ears hurt"
     rawaan2 = "Woke up very tired today, even though I slept for about 8 hours. I stayed in bed for about an hour before I realised that I would be late for work. I also had a tough nose so I had to use my natural A spray to help me breathe comfortably before leaving home. I walked today as I couldn't catch the bus to work. I was walking slowly today so the commute took me longer than usual. I was sleepy throughout the day, even though I drank my morning tea. I had the tea with the chocolate cupcake. Then for lunch I had chicken Brianne. I didn't eat a proper meal for dinner since I wasn't that hungry and I only made an avocado smoothie with San honey as a sweeter."
+    foodTest1 = "Today I had a banana for breakfast. I had an apple and a pasta plate for lunch. For dinner I am going to eat chicken and rice."
+    foodTest2 = "In the morning I had two toasts and an apple. Then I had pasta and coffee for lunch. In the evening I am planning on eating some spaguetti."
+    foodTest3 = "Today I ate a banana, a toast and a pizza"
     array = [test_text_Sukhi, test_text_description, rawaan1, Rhys1, rawaan2, negationTry1, negationTry2, limitTesting]
-
+    food_test = [foodTest1, foodTest2, foodTest3]
     return array[num]

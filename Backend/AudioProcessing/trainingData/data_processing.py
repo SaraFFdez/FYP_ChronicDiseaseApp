@@ -275,7 +275,7 @@ def get_revision_data():
     TEST_ENTITY_COUNTER = {}
 
     # This will help distribute the entities (i.e. we don't want 1000 PERSON entities, but only 80 ORG entities)
-    REVISION_SENTENCE_SOFT_LIMIT = 100
+    REVISION_SENTENCE_SOFT_LIMIT = 300
 
     # helper function for incrementing the revision counters
     def increment_revision_counters(entity_counter, entities):
@@ -314,7 +314,7 @@ def get_revision_data():
 #symptoms = pd.read_json(training_path + "symptoms_data.json", typ="series") 
 #TRAIN_DATA, TEST_DATA = create_data_sets_symptoms(symptoms, 165)
 foods = get_cvs_data_food()
-TRAIN_DATA, TEST_DATA = create_data_sets_food(foods)
+TRAIN_DATA, TEST_DATA = create_data_sets_food(foods, 300)
 TRAIN_DATA_REVISION, TEST_DATA_REVISION = get_revision_data()
 save_spacy_format(TRAIN_DATA + TRAIN_DATA_REVISION, TEST_DATA + TEST_DATA_REVISION)
 
