@@ -1,5 +1,6 @@
 import spacy
 import helpers
+import numpy as np
 
 def save_entity_ruler():
     nlp = spacy.load("en_core_web_sm")
@@ -18,50 +19,66 @@ def symptoms_identifier(text):
     nlp = spacy.load("en_core_web_sm") #load pretrained nlp model
     ruler = nlp.add_pipe("entity_ruler", after="ner") #create entity ruler
     ruler.from_disk("Backend\\AudioProcessing\\trained_algorithms\\entity_ruler") #load entity ruler
-    doc = nlp(text)
+
+    processed_text = text.replace(" but ", ". ")
+    doc = nlp(processed_text) #process the text
     symptoms_found_id = []
 
     for ent in doc.ents: #find symptoms entities and add them to a list if they are not repeated.
-        print (ent.text, ent.label_, ent.ent_id_) #delete later
-        if ent.label_ == "SYMPTOM":
-            if ent.ent_id_ == "pain_noun" or ent.ent_id_ == "pain_verb" or ent.ent_id_ == "noun_pain":
-                symptomID = pain_pattern_handler(ent)
-            elif ent.ent_id_ == "sensitivity":
-                symptomID = sensitivity_pattern_handler(ent)
-            else:
-                symptomID = ent.ent_id_
-
-            if symptomID != "Error" and symptomID not in symptoms_found_id:
-                symptoms_found_id.append(symptomID)   
-
+        #print (ent.text, ent.label_, ent.ent_id_) #delete later
+        if ent.label_ == "SYMPTOM": #check it is a symptom
+            if text_classifier_symptoms(ent.sent.text): #check the phrase is "positive"
+                #handle patterns
+                if ent.ent_id_ == "pain_noun" or ent.ent_id_ == "pain_verb" or ent.ent_id_ == "noun_pain":
+                    symptomID = pain_pattern_handler(ent)
+                elif ent.ent_id_ == "sensitivity":
+                    symptomID = sensitivity_pattern_handler(ent)
+                else:
+                    symptomID = ent.ent_id_
+                #add to the symptoms list if not there yet
+                if symptomID != "Error" and symptomID not in symptoms_found_id:
+                    symptoms_found_id.append(symptomID) 
+                      
     return symptoms_found_id
 
+def text_classifier_symptoms(sentence, model_dir = 'Backend\\AudioProcessing\\trained_algorithms\\ML\\symptoms_classif_model'):
+    nlpClassify = spacy.load(model_dir) #load model
+    doc = nlpClassify(sentence) #process sentence
+    max_confidence_label = list(doc.cats.keys())[np.argmax(np.array(list(doc.cats.values())))] #find label
+
+    if max_confidence_label == "NEGATIVE":
+        return False
+    return True
+
+#handle the different pain patterns
 def pain_pattern_handler(ent):
     if ent.ent_id_ == "pain_noun" or ent.ent_id_ == "noun_pain":
         for word in ent:
             if word.pos_ == "NOUN" and word.lower_ != "pain":
-                return word.text + " pain"
+                return word.lemma_ + " pain"
     elif ent.ent_id_ == "pain_verb":
         for word in ent:
             if word.pos_ == "NOUN" and word.lower_ != "pain":
-                return "pain during " + word.text
+                return "pain during " + word.lemma_
         for word in ent:
             if word.pos_ == "VERB":
-                return "pain " + word.text  
+                return "pain " + word.lemma_  
     return "Error"
 
+#handle the different sensitivity patterns
 def sensitivity_pattern_handler(ent):
     for word in ent:
         if word.pos_ == "NOUN" and word.lower_ != "sensitivity":
-            return word.text + " sensitivity" 
+            return word.lemma_ + " sensitivity" 
     for word in ent:
         if word.lower_ != "sensitivity":
-            return word.text + " sensitivity"
+            return word.lemma_ + " sensitivity"
     return "unidentified sensitivity"
 
-# for i in range(0,5):
-#     text = helpers.audio_tests(i)
-#     print(text)
-#     print("LIST OF SYMPTOMS", symptoms_identifier(text))
+def test_symptoms_func(num1, num2):
+    for i in range(num1,num2):
+        text = helpers.audio_tests(i)
+        print(text)
+        print("LIST OF SYMPTOMS", symptoms_identifier(text))
 
 #save_entity_ruler()

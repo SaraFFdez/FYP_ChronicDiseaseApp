@@ -5,10 +5,10 @@ import json
 import spacy
 from spacy.util import minibatch, compounding
 import warnings
+import en_core_web_md
 import matplotlib.pyplot as plt
 from spacy.tokens import DocBin
 from tqdm import tqdm
-
 
 training_path = "Backend\\AudioProcessing\\trainingData\\"
 
@@ -20,7 +20,6 @@ def load_data(file):
 def change_data_to_v3(TRAIN_DATA):
     nlp = spacy.blank("en") # load a new spacy model
     db = DocBin() # create a DocBin object
-
     for text, annot, in tqdm(TRAIN_DATA): # data in previous format
         doc = nlp.make_doc(text) # create doc object from text
         ents = []
@@ -37,8 +36,8 @@ def change_data_to_v3(TRAIN_DATA):
 def save_spacy_format(TRAIN_DATA, VALIDATION_DATA):
     symptoms_train = change_data_to_v3(TRAIN_DATA)
     symptoms_validate = change_data_to_v3(VALIDATION_DATA)
-    symptoms_train.to_disk("Backend\\AudioProcessing\\trainingData\\symptomsML_training.spacy")
-    symptoms_validate.to_disk("Backend\\AudioProcessing\\trainingData\\symptomsML_validate.spacy")
+    symptoms_train.to_disk("Backend\\AudioProcessing\\trainingData\\foodML_training.spacy")
+    symptoms_validate.to_disk("Backend\\AudioProcessing\\trainingData\\foodML_testing.spacy")
 
 def get_cvs_data_symptoms():
 #load the file of medical information and clean it
@@ -59,22 +58,6 @@ def get_cvs_data_symptoms():
     two_worded_symptoms = symptoms[symptoms.str.split().apply(len) == 2]
     three_worded_symptoms = symptoms[symptoms.str.split().apply(len) >= 3]
 
-    # create a bar plot
-    # fig, ax = plt.subplots(figsize=(10, 6))
-    # ax.bar([1, 2, 3], [one_worded_symptoms.size, two_worded_symptoms.size, three_worded_symptoms.size])
-
-    # label the x-axis instances
-    # ax.set_xticks([1, 2, 3])
-    # ax.set_xticklabels(["one", "two", "three"])
-
-    # # set the title and the xy-axis labels
-    # plt.title("Number of Words in Symptoms Entities")
-    # plt.xlabel("Number of Words")
-    # plt.ylabel("Symptoms Entities")
-
-    # # display the plot
-    # plt.show()
-
     # total number of symptoms
     total_num_symptoms = round(one_worded_symptoms.size / 45 * 100)
 
@@ -91,8 +74,37 @@ def get_cvs_data_symptoms():
         print(f"{i+1}-worded symptoms entities:", symptoms[symptoms.str.split().apply(len) == i + 1].size)
     return symptoms
 
+def get_cvs_data_food():
+    # read in the food csv file
+    food_df = pd.read_csv(training_path + "food.csv")
+    # print row and column information
+    food_df.head()
+    foods = food_df[food_df["description"].str.contains("[^a-zA-Z ]") == False]["description"].apply(lambda food: food.lower())
+    # filter out foods with more than 3 words, drop any duplicates
+    foods = foods[foods.str.split().apply(len) <= 3].drop_duplicates()
+    # print the remaining size
+    foods.size
+    one_worded_foods = foods[foods.str.split().apply(len) == 1]
+    two_worded_foods = foods[foods.str.split().apply(len) == 2]
+    three_worded_foods = foods[foods.str.split().apply(len) == 3]
+    # total number of foods
+    total_num_foods = round(one_worded_foods.size / 45 * 100)
+
+    # shuffle the 2-worded and 3-worded foods since we'll be slicing them
+    two_worded_foods = two_worded_foods.sample(frac=1)
+    three_worded_foods = three_worded_foods.sample(frac=1)
+
+    # append the foods together 
+    foods = one_worded_foods.append(two_worded_foods[:round(total_num_foods * 0.30)]).append(three_worded_foods[:round(total_num_foods * 0.25)])
+
+    # print the resulting sizes
+    for i in range(3):
+        print(f"{i+1}-worded food entities:", foods[foods.str.split().apply(len) == i + 1].size)
+    
+    return foods
+    
 #-----------------------------------------------DATA SELECTED, CREATING DATA SET ------------------------------
-def create_data_sets(symptoms,sentence_limit = 167):
+def create_data_sets_symptoms(symptoms,sentence_limit = 167):
     symptoms_templates = load_data(training_path + "symptoms_template.json")
     TRAIN_SYMP_DATA = {
         "one_word": [],
@@ -161,9 +173,151 @@ def create_data_sets(symptoms,sentence_limit = 167):
     
     return TRAIN_DATA, TEST_DATA
 
-#symptoms = get_cvs_data_symptoms()
-symptoms = pd.read_json(training_path + "symptoms_data.json", typ="series") 
+def create_data_sets_food(foods ,sentence_limit = 167):
+    food_templates = load_data(training_path + "food_templates.json")
+    TRAIN_FOOD_DATA = {
+        "one_food": [],
+        "two_foods": [],
+        "three_foods": []
+    }
 
-TRAIN_DATA, TEST_DATA = create_data_sets(symptoms, 10)
-TRAIN_DATA = TRAIN_DATA + load_data(training_path + "symptomsML_training.json")
-save_spacy_format(TRAIN_DATA, TEST_DATA)
+    TEST_FOOD_DATA = {
+        "one_food": [],
+        "two_foods": [],
+        "three_foods": []
+    }
+
+    # one_food, two_food, and three_food combinations will be limited to 167 sentences
+    FOOD_SENTENCE_LIMIT = sentence_limit
+
+    # helper function for deciding what dictionary and subsequent array to append the food sentence on to
+    def get_food_data(count):
+        return {
+            1: TRAIN_FOOD_DATA["one_food"] if len(TRAIN_FOOD_DATA["one_food"]) < FOOD_SENTENCE_LIMIT else TEST_FOOD_DATA["one_food"],
+            2: TRAIN_FOOD_DATA["two_foods"] if len(TRAIN_FOOD_DATA["two_foods"]) < FOOD_SENTENCE_LIMIT else TEST_FOOD_DATA["two_foods"],
+            3: TRAIN_FOOD_DATA["three_foods"] if len(TRAIN_FOOD_DATA["three_foods"]) < FOOD_SENTENCE_LIMIT else TEST_FOOD_DATA["three_foods"],
+        }[count]
+
+    # the pattern to replace from the template sentences
+    pattern_to_replace = "{}"
+
+    # shuffle the data before starting
+    foods = foods.sample(frac=1)
+
+    # the count that helps us decide when to break from the for loop
+    food_entity_count = foods.size - 1
+
+    # start the while loop, ensure we don't get an index out of bounds error
+    while food_entity_count >= 2:
+        entities = []
+
+        # pick a random food template
+        sentence = food_templates[random.randint(0, len(food_templates) - 1)]
+
+        # find out how many braces "{}" need to be replaced in the template
+        matches = re.findall(pattern_to_replace, sentence)
+
+        # for each brace, replace with a food entity from the shuffled food data
+        for match in matches:
+            food = foods.iloc[food_entity_count]
+            food_entity_count -= 1
+
+            # replace the pattern, but then find the match of the food entity we just inserted
+            sentence = sentence.replace(match, food, 1)
+            match_span = re.search(food, sentence).span()
+
+            # use that match to find the index positions of the food entity in the sentence, append
+            entities.append((match_span[0], match_span[1], "FOOD"))
+
+        # append the sentence and the position of the entities to the correct dictionary and array
+        get_food_data(len(matches)).append((sentence, {"entities": entities}))
+    TRAIN_DATA = TRAIN_FOOD_DATA["one_food"] + TRAIN_FOOD_DATA["two_foods"] + TRAIN_FOOD_DATA["three_foods"]
+    TEST_DATA = TEST_FOOD_DATA["one_food"] + TEST_FOOD_DATA["two_foods"] + TEST_FOOD_DATA["three_foods"]
+
+    for key in TRAIN_FOOD_DATA:
+        print("{} {} sentences: {}".format(len(TRAIN_FOOD_DATA[key]), key, TRAIN_FOOD_DATA[key][0]))
+
+    for key in TEST_FOOD_DATA:
+        print("{} {} items: {}".format(len(TEST_FOOD_DATA[key]), key, TEST_FOOD_DATA[key][0]))
+    
+    return TRAIN_DATA, TEST_DATA
+
+def get_revision_data():
+    npr_df = pd.read_csv(training_path + "npr.csv")
+    print("data loaded")
+    # print row and column information
+    print(npr_df.head())
+    # create an nlp object as we'll use this to seperate the sentences and identify existing entities
+    nlp = en_core_web_md.load()
+    revision_texts = []
+    print("nlp loaded")
+    #counter = 0
+    # convert the articles to spacy objects to better identify the sentences. Disabled unneeded components. # takes ~ 4 minutes
+    for doc in nlp.pipe(npr_df["Article"][:5000], batch_size=30, disable=["tagger","ner"]): #
+        #print("looking at article", counter)
+        #counter = counter + 1
+        for sentence in doc.sents:
+
+            if  40 < len(sentence.text) < 80:
+                # some of the sentences had excessive whitespace in between words, so we're trimming that
+                revision_texts.append(" ".join(re.split("\s+", sentence.text, flags=re.UNICODE)))
+    revisions = []
+    # Use the existing spaCy model to predict the entities, then append them to revision
+    for doc in nlp.pipe(revision_texts, batch_size=50, disable=["tagger", "parser"]):
+        # don't append sentences that have no entities
+        if len(doc.ents) > 0:
+            revisions.append((doc.text, {"entities": [(e.start_char, e.end_char, e.label_) for e in doc.ents]}))
+    TRAIN_REVISION_DATA = []
+    TEST_REVISION_DATA = []
+    print("start training data")
+    # create dictionaries to keep count of the different entities
+    TRAIN_ENTITY_COUNTER = {}
+    TEST_ENTITY_COUNTER = {}
+
+    # This will help distribute the entities (i.e. we don't want 1000 PERSON entities, but only 80 ORG entities)
+    REVISION_SENTENCE_SOFT_LIMIT = 100 #100
+
+    # helper function for incrementing the revision counters
+    def increment_revision_counters(entity_counter, entities):
+        for entity in entities:
+            label = entity[2]
+            if label in entity_counter:
+                entity_counter[label] += 1
+            else:
+                entity_counter[label] = 1
+
+    random.shuffle(revisions)
+    print("starting revisions")
+    for revision in revisions:
+        # get the entities from the revision sentence
+        entities = revision[1]["entities"]
+
+        # simple hack to make sure spaCy entities don't get too one-sided
+        should_append_to_train_counter = 0
+        for _, _, label in entities:
+            if label in TRAIN_ENTITY_COUNTER and TRAIN_ENTITY_COUNTER[label] > REVISION_SENTENCE_SOFT_LIMIT:
+                should_append_to_train_counter -= 1
+            else:
+                should_append_to_train_counter += 1
+
+        # simple switch for deciding whether to append to train data or test data
+        if should_append_to_train_counter >= 0:
+            TRAIN_REVISION_DATA.append(revision)
+            increment_revision_counters(TRAIN_ENTITY_COUNTER, entities)
+        else:
+            TEST_REVISION_DATA.append(revision)
+            increment_revision_counters(TEST_ENTITY_COUNTER, entities)
+    
+    return TRAIN_REVISION_DATA, TEST_REVISION_DATA
+
+#symptoms = get_cvs_data_symptoms()
+#symptoms = pd.read_json(training_path + "symptoms_data.json", typ="series") 
+#TRAIN_DATA, TEST_DATA = create_data_sets_symptoms(symptoms, 165)
+foods = get_cvs_data_food()
+TRAIN_DATA, TEST_DATA = create_data_sets_food(foods)
+TRAIN_DATA_REVISION, TEST_DATA_REVISION = get_revision_data()
+save_spacy_format(TRAIN_DATA + TRAIN_DATA_REVISION, TEST_DATA + TEST_DATA_REVISION)
+
+#train!
+# py -m spacy train Backend\\AudioProcessing\\trainingData\\food_config.cfg --output Backend\\AudioProcessing\\trained_algorithms\\ML\\food_NER_ML --paths.train Backend\\AudioProcessing\\trainingData\\foodML_training.spacy --paths.dev Backend\\AudioProcessing\\trainingData\\foodML_testing.spacy
+#py -m spacy train Backend\\AudioProcessing\\trainingData\\food_config_acc.cfg --output Backend\\AudioProcessing\\trained_algorithms\\ML\\food_NER_ML --paths.train Backend\\AudioProcessing\\trainingData\\foodML_training.spacy --paths.dev Backend\\AudioProcessing\\trainingData\\foodML_testing.spacy
