@@ -37,34 +37,35 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-      body: Center(
-        child: _screens.elementAt(_selectedIndex),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const [
+        items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: Colors.black),
+              icon: const Icon(Icons.home, color: Colors.black),
               label: "Home",
-              backgroundColor: Colors.grey),
+              backgroundColor: Colors.grey[350]),
           BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today, color: Colors.black),
+              icon: const Icon(Icons.calendar_today, color: Colors.black),
               label: "Calendar",
-              backgroundColor: Colors.grey),
+              backgroundColor: Colors.grey[350]),
           BottomNavigationBarItem(
-              icon: Icon(Icons.mic, color: Colors.black),
+              icon: const Icon(Icons.mic, color: Colors.black),
               label: "Microphone",
-              backgroundColor: Colors.grey),
+              backgroundColor: Colors.grey[350]),
           BottomNavigationBarItem(
-              icon: Icon(Icons.analytics, color: Colors.black),
+              icon: const Icon(Icons.analytics, color: Colors.black),
               label: "Analysis",
-              backgroundColor: Colors.grey),
+              backgroundColor: Colors.grey[350]),
           BottomNavigationBarItem(
-              icon: Icon(Icons.note, color: Colors.black),
+              icon: const Icon(Icons.note, color: Colors.black),
               label: "Notes",
-              backgroundColor: Colors.grey)
+              backgroundColor: Colors.grey[350])
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.green[400],
+        selectedItemColor: Colors.black,
         onTap: _onItemTapped,
       ),
     ));
