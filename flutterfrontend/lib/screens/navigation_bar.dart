@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutterfrontend/screens/analysis_page.dart';
-import 'package:flutterfrontend/screens/calendar_page.dart';
-import 'package:flutterfrontend/screens//notes_page.dart';
-import 'package:flutterfrontend/screens/recording_page.dart';
-import 'screens/home_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class NavigationBar extends StatefulWidget {
+  const NavigationBar({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<NavigationBar> createState() => _NavigationBarState();
 }
 
-class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
+//Esto luego lo llaman en el body https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html
+//They push the different bodys in. I wonder if we could push scaffolds?
+//Icon sizes and font can also be modified
+//https://www.youtube.com/watch?v=xoKqQjSDZ60&ab_channel=JohannesMilke
+class _NavigationBarState extends State<NavigationBar> {
   int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _screens = <Widget>[
-    HomePage(),
-    Calendar(),
-    RecordingPage(),
-    AnalysisPage(),
-    Notes()
+    Text(
+      'Index 0: Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: Business',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -35,8 +38,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
+    return Scaffold(
       body: Center(
         child: _screens.elementAt(_selectedIndex),
       ),
@@ -67,6 +69,6 @@ class _MyAppState extends State<MyApp> {
         selectedItemColor: Colors.green[400],
         onTap: _onItemTapped,
       ),
-    ));
+    );
   }
 }

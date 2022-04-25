@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AnalysisPage extends StatefulWidget {
-  AnalysisPage({Key? key}) : super(key: key);
+  const AnalysisPage({Key? key}) : super(key: key);
 
   @override
   State<AnalysisPage> createState() => _AnalysisPageState();
