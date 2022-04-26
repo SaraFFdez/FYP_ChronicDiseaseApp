@@ -12,7 +12,8 @@ class _HomePageState extends State<HomePage> {
   String _timeString = "00:00";
   String _dateString = "00/00/00";
   late Timer _timer;
-  double _progressValue = 0.5;
+  double _progressValue = 0.63;
+  double _progressValuePercent = 63.0;
 
   String getCorrectTime() {
     String minutes = "";
@@ -62,17 +63,22 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        title: const Text(
-          "My first app",
-          style: TextStyle(color: Colors.black),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.green[100],
-      ),
       body: Column(
           //crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            SizedBox(
+              height: 40.0,
+              child: Container(
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 167, 246, 170),
+                  Color(0xFFF5F5F5),
+                ],
+              ))),
+            ),
             Expanded(
                 flex: 1,
                 child: Row(
@@ -84,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       flex: 3,
                       child: Container(
-                        padding: const EdgeInsets.all(40),
+                        padding: const EdgeInsets.all(20),
                         color: Colors.white,
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,10 +98,11 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 _timeString,
                                 style: const TextStyle(
-                                    fontSize: 30), //change the font later
+                                    fontSize: 60), //change the font later
                               ),
-                              const SizedBox(height: 5.0),
-                              Text(_dateString)
+                              const SizedBox(height: 10.0),
+                              Text(_dateString,
+                                  style: const TextStyle(fontSize: 25))
                             ]), //if we find a way to center this in the row, yay
                       ),
                     ),
@@ -115,11 +122,12 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Center(
                                   child: SizedBox(
-                                    height: 350.0,
-                                    width: 350.0,
+                                    height: 320.0,
+                                    width: 320.0,
                                     child: CircularProgressIndicator(
                                       value: _progressValue,
-                                      backgroundColor: Colors.grey,
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 119, 118, 118),
                                       valueColor:
                                           const AlwaysStoppedAnimation<Color>(
                                               Colors.green),
@@ -127,7 +135,13 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                 ),
-                                Center(child: Text("Progress, $_progressValue"))
+                                Center(
+                                    child: Text(
+                                  "Progress: $_progressValuePercent %",
+                                  style: const TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold),
+                                ))
                               ],
                             ))),
                     const Expanded(flex: 1, child: SizedBox()),
