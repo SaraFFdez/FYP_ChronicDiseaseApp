@@ -11,17 +11,11 @@ class _NotesState extends State<Notes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
+        backgroundColor: Colors.grey[100],
+        body: Column(children: const [
           Center(
-            child: CircularProgressIndicator(
-              value: 0.5,
-              strokeWidth: 20.0,
-            ),
+            child: Text("Notes page"),
           ),
-          Text("here is the thing")
-        ],
-      ),
-    );
+        ]));
   }
 }

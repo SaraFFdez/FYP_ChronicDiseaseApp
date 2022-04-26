@@ -10,8 +10,25 @@ class RecordingPage extends StatefulWidget {
 class _RecordingPageState extends State<RecordingPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text("This is the recording page"),
-    );
+    return Scaffold(
+        backgroundColor: Colors.grey[100],
+        body: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Center(
+                  child: Text(
+                "Please upload your daily voice recording",
+                style: TextStyle(fontSize: 15),
+              )),
+              const SizedBox(height: 20.0),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text("Upload"),
+              )
+            ],
+          ),
+        ));
   }
 }

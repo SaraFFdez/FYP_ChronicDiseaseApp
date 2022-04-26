@@ -41,33 +41,51 @@ class _MyAppState extends State<MyApp> {
         index: _selectedIndex,
         children: _screens,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-              icon: const Icon(Icons.home, color: Colors.black),
-              label: "Home",
-              backgroundColor: Colors.grey[350]),
-          BottomNavigationBarItem(
-              icon: const Icon(Icons.calendar_today, color: Colors.black),
-              label: "Calendar",
-              backgroundColor: Colors.grey[350]),
-          BottomNavigationBarItem(
-              icon: const Icon(Icons.mic, color: Colors.black),
-              label: "Microphone",
-              backgroundColor: Colors.grey[350]),
-          BottomNavigationBarItem(
-              icon: const Icon(Icons.analytics, color: Colors.black),
-              label: "Analysis",
-              backgroundColor: Colors.grey[350]),
-          BottomNavigationBarItem(
-              icon: const Icon(Icons.note, color: Colors.black),
-              label: "Notes",
-              backgroundColor: Colors.grey[350])
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black,
-        onTap: _onItemTapped,
+      bottomNavigationBar: SizedBox(
+        height: 70.0,
+        child: BottomNavigationBar(
+          iconSize: 35,
+          items: [
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.home, color: Colors.black),
+                label: "Home",
+                backgroundColor: Colors.grey[350]),
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.calendar_today, color: Colors.black),
+                label: "Calendar",
+                backgroundColor: Colors.grey[350]),
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.upload_file, color: Colors.black),
+                label: "Upload audio",
+                backgroundColor: Colors.grey[350]),
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.analytics, color: Colors.black),
+                label: "Analysis",
+                backgroundColor: Colors.grey[350]),
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.note, color: Colors.black),
+                label: "Notes",
+                backgroundColor: Colors.grey[350])
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.black,
+          onTap: _onItemTapped,
+        ),
       ),
+      floatingActionButton: SizedBox(
+        height: 70.0,
+        width: 70.0,
+        child: FloatingActionButton(
+          backgroundColor: Colors.green[300],
+          onPressed: () {},
+          child: const Icon(
+            Icons.mic,
+            color: Colors.black,
+            size: 25,
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     ));
   }
 }
