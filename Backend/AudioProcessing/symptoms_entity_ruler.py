@@ -82,3 +82,4 @@ def test_symptoms_func(num1, num2):
         print("LIST OF SYMPTOMS", symptoms_identifier(text))
 
 #save_entity_ruler()
+test_symptoms_func(1, 6)

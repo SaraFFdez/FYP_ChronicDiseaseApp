@@ -1,0 +1,52 @@
+[
+    {
+        "label": "ACTIVITY",
+        "pattern": [{"POS": "VERB"}, {"POS": "ADP", "OP": "*"}, {"POS": "DET", "OP": "*"}, {"POS": "PRON", "OP": "*"}, {"POS": "NOUN"}],
+        "id": "general_activity"
+    },
+    {
+        "label": "ACTIVITY",
+        "pattern": [{"POS": "VERB"}, {"POS": "AUX"}, {"POS": "DET", "OP": "*"}, {"POS": "PRON", "OP": "*"}, {"POS": "NOUN"}],
+        "id": "general_activity"
+    },
+    {
+        "label": "ACTIVITY",
+        "pattern": [{"LEMMA": "go"}, {"POS": "VERB"}],
+        "id": "general_activity"
+    },
+    {
+        "label": "ACTIVITY",
+        "pattern": [{"LEMMA": "clean"}],
+        "id": "clean"
+    },
+    {
+        "label": "ACTIVITY",
+        "pattern": [{"LEMMA": "shower"}],
+        "id": "shower"
+    },
+    {
+        "label": "ACTIVITY",
+        "pattern": [{"LEMMA": "exercise"}],
+        "id": "exercise"
+    },
+    {
+        "label": "ACTIVITY",
+        "pattern": [{"LEMMA": "study"}],
+        "id": "study"
+    },
+    {
+        "label": "ACTIVITY",
+        "pattern": [{"LEMMA": "do"}, {"POS": "DET", "OP": "*"}, {"LEMMA": "dish"} ],
+        "id": "did the dishes"
+    },
+    {
+        "label": "ACTIVITY",
+        "pattern": [{"LEMMA": "do"}, {"POS": "DET", "OP": "*"}, {"LEMMA": "exercise"} ],
+        "id": "exercise"
+    },
+    {
+        "label": "ACTIVITY",
+        "pattern": "get dressed",
+        "id": "get dressed"
+    }
+]
