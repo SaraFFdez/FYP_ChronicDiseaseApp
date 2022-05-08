@@ -39,6 +39,11 @@ def audio_tests(num):
     foodTest1 = "Today I had a banana for breakfast. I had an apple and a pasta plate for lunch. For dinner I am going to eat chicken and rice."
     foodTest2 = "In the morning I had two toasts and an apple. Then I had pasta and coffee for lunch. In the evening I am planning on eating some spaguetti."
     foodTest3 = "Today I ate a banana, a toast and a pizza"
+    dani_activity = ["I've gone to the mountain to see the sunset. I have gone to the gym once to do chest. I've watched a movie with friends yesterday night, we had a dinner event that we did. We also went to the engineering ball and had some cocktails there. Had some nice conversations and I would say that are the main things of the week. Also I studied FYP. "]
+    rhys_activity = ["On monday I went to the library with Sara. I did some studying and some past papers. On tuesday I went to the library with carmen and in teh evening I watched a football game. I then went back to a friends house to watch a tv show, watched some football and then but some facemasks on the evening. On thrusday I had some final revision prep on the library for my exam and then went home and relaxed. On friday I did my exam and then went climbing in the afternoon. In the evening I went to the cinemas to watch a film. In the Saturday I stayed at home and had a rest most of the day other than to go out on the evening to watch some football."]
+    alvaro_activity = ["Last week I went to spain, I partied a lot, I did a barbacue the other day. I had fun with my friends, I drank alcohol and I think that is all. I also caught a plane to come back to the netherlands"]
+    kav_activity = ["On monday and tuesday I revised for an exam I had on wednesday then I did more revision for an exam on friday. After my exam on Friday I cycled home and I watched TV and had a nap"]
+
     array = [test_text_Sukhi, test_text_description, rawaan1, Rhys1, rawaan2, negationTry1, negationTry2, limitTesting]
     food_test = [foodTest1, foodTest2, foodTest3]
     return array[num]

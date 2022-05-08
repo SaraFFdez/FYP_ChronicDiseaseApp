@@ -37,10 +37,15 @@ def activity_pattern_processing(ent):
     if ent.ent_id_ == "general_activity":
         for word in ent:
             if word.pos_ == "VERB" and word.lemma_ in possible_verbs:
-                return ent.text
+                #if word.tag_ == "VBG":
+                indexOfSpace = ent.text.index(' ')
+                if indexOfSpace == -1: 
+                    return word.lemma_
+                return word.lemma_ + ent.text[(indexOfSpace):] 
+                #return ent.text
         return "Error"
     else:
-        return ent.text
+        return ent.ent_id_
 
 def test_activity_func(num1, num2):
     for i in range(num1,num2):
@@ -49,10 +54,10 @@ def test_activity_func(num1, num2):
         print("LIST OF ACTIVITIES", activity_identifier(text))
 
 def test_activity_func_2():
-    test_array = ["I went for a walk this morning, then I took a bath and read a book. After that I washed my car and cleaned the house"]
+    test_array = ["Last week I went to spain, I partied a lot, I did a barbacue the other day. I had fun with my friends, I drank alcohol and I think that is all. I also caught a plane to come back to the netherlands"]
     for text in test_array:
         print(text)
         print("LIST OF ACTIVITIES", activity_identifier(text))
 
-#test_activity_func_2()
-save_entity_ruler_activity()
+test_activity_func_2()
+# save_entity_ruler_activity()
