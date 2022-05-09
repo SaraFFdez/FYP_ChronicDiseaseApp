@@ -26,7 +26,7 @@ def activity_identifier(text):
     for ent in doc.ents: 
         #print (ent.text, ent.label_, ent.ent_id_) #delete later
         if ent.label_ == "ACTIVITY": #check it is a symptom
-            print(ent.text)
+            #print(ent.text)
             acitivity = activity_pattern_processing(ent)
             if acitivity != "Error" and acitivity not in activities_found:
                     activities_found.append(acitivity)               
@@ -54,7 +54,7 @@ def test_activity_func(num1, num2):
         print("LIST OF ACTIVITIES", activity_identifier(text))
 
 def test_activity_func_2():
-    test_array = ["Last week I went to spain, I partied a lot, I did a barbacue the other day. I had fun with my friends, I drank alcohol and I think that is all. I also caught a plane to come back to the netherlands"]
+    test_array = ["On monday I revised for my bussiness exams by reading through my notes and rewatching some business lectures and I also did some past papers. On tuesday I had an exam in the afternoon and I also did a past paper in the evening for the up for the next exam. Next day on wednesday I had the business exam and then relaxed the rest of the day by watching anime. On thrusday I did research on my deep neural deep learning neural network for my final year project. On friday I did more research for my final year project. On saturday I began studying for the upcoming exam for another upcoming exam and played some videogames with some of my friends. On sunday i travelled back to my flat from my family home and continued studying for my upcoming exam.", "This week on monday I went to the spa. On tuesday I went to work. On wednesday I went to the gym. On thrusday I went skydiving. On friday I went out to dinner. Today is saturday and so I went shopping with my sister","I went to the park to have a picnic and played volleyball"]
     for text in test_array:
         print(text)
         print("LIST OF ACTIVITIES", activity_identifier(text))
