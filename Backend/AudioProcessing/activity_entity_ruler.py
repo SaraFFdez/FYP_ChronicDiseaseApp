@@ -1,6 +1,5 @@
 import spacy
-from yaml import load
-import helpers
+import AudioProcessing.helpers as helpers
 
 def save_entity_ruler_activity():
     nlp = spacy.load("en_core_web_sm")
@@ -47,17 +46,11 @@ def activity_pattern_processing(ent):
     else:
         return ent.ent_id_
 
-def test_activity_func(num1, num2):
-    for i in range(num1,num2):
-        text = helpers.audio_tests(i)
-        print(text)
-        print("LIST OF ACTIVITIES", activity_identifier(text))
-
 def test_activity_func_2():
     test_array = ["On monday I revised for my bussiness exams by reading through my notes and rewatching some business lectures and I also did some past papers. On tuesday I had an exam in the afternoon and I also did a past paper in the evening for the up for the next exam. Next day on wednesday I had the business exam and then relaxed the rest of the day by watching anime. On thrusday I did research on my deep neural deep learning neural network for my final year project. On friday I did more research for my final year project. On saturday I began studying for the upcoming exam for another upcoming exam and played some videogames with some of my friends. On sunday i travelled back to my flat from my family home and continued studying for my upcoming exam.", "This week on monday I went to the spa. On tuesday I went to work. On wednesday I went to the gym. On thrusday I went skydiving. On friday I went out to dinner. Today is saturday and so I went shopping with my sister","I went to the park to have a picnic and played volleyball"]
     for text in test_array:
         print(text)
         print("LIST OF ACTIVITIES", activity_identifier(text))
 
-test_activity_func_2()
+#test_activity_func_2()
 # save_entity_ruler_activity()

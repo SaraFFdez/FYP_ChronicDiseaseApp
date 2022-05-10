@@ -1,45 +1,37 @@
 import spacy
-import helpers
-import json
 import numpy as np
 
-def test_food_ML(num1, num2):
-    #nlpFood = spacy.load("Backend\\AudioProcessing\\trained_algorithms\\ML\\food_NER_ML\\model-best")
-    for i in range(num1,num2):
-        text = helpers.audio_tests(i)
-        print(text)
-        food = food_timing_identificator(text)
-        print(food)
-
-def food_timing_identificator(text):
-    nlpFood = spacy.load("Backend\\AudioProcessing\\trained_algorithms\\ML\\food_NER_ML\\model-best")
+#returns a dictionary of the foods in the text and the time they were consumed at.
+def food_timing_identificator(text, model_dir = "Backend\\AudioProcessing\\trained_algorithms\\ML\\food_NER_ML\\model-best"):
+    nlpFood = spacy.load(model_dir) #load pretrained model
     nlpFood.add_pipe("sentencizer")
-    doc = nlpFood(text)
-    food_dict = {"no_time" : [], "morning" : [], "afternoon" : [], "evening": []}
+    doc = nlpFood(text) 
+    food_dict = {"no_time" : [], "morning" : [], "afternoon" : [], "evening": []} #initialize the dictionary
     no_food_ents = True
+
     for ent in doc.ents:
         if ent.label_ == "FOOD":
-            #ADD checks here
-            print(ent)
+            #do we want any checks like: this thing is a noun (which i am pretty sure it should be lol)?
             no_food_ents = False
             key = time_of_food(ent.sent.text)
             food_dict[key].append(ent.text)
 
     if no_food_ents: 
-        return dict() #IF NO FOOD ENTITIES FOUND, SEND AN EMPTY DICTIONARY
+        return dict() #if no food entities found, return an empty dictionary
 
     return food_dict
      
-#takes in a sentence with a food entity, identifies what time of the day it was eaten in. 
+#takes in a sentence with a food entity, identifies what time of the day it was eaten in and returns it. 
 def time_of_food(sentence, model_dir = 'Backend\\AudioProcessing\\trained_algorithms\\ML\\food_time_classif_model'):
     threshold = 0.65
-    nlpClassify = spacy.load(model_dir) #load model
+    nlpClassify = spacy.load(model_dir) #load classification model
     doc = nlpClassify(sentence) #process sentence
     max_confidence_label = list(doc.cats.keys())[np.argmax(np.array(list(doc.cats.values())))] #find label
 
-    if doc.cats[max_confidence_label] < threshold: #if it didnt classify it correctly, no time might have been specified
+    if doc.cats[max_confidence_label] < threshold: #if it is not past a certain threshold, assume no time has been specified
         return "no_time"
     
+    #return max_confidence_label.lower()
     if max_confidence_label == "MORNING":
         return "morning"
     elif max_confidence_label == "AFTERNOON":
@@ -48,5 +40,3 @@ def time_of_food(sentence, model_dir = 'Backend\\AudioProcessing\\trained_algori
         return "evening"
 
     return "no_time"
-
-test_food_ML(0,6)

@@ -15,7 +15,7 @@
     "write", 
     "go",
     "come",
-    "walked",
+    "walk",
     "bus",
     "drive",
     "hang",
@@ -50,5 +50,6 @@
     "fall",
     "fix",
     "grab",
-    "jump"
+    "jump",
+    "visit"
 ]
