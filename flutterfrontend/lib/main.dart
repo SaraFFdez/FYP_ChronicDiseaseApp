@@ -3,7 +3,7 @@ import 'package:flutterfrontend/screens/analysis_page.dart';
 import 'package:flutterfrontend/screens/calendar_page.dart';
 import 'package:flutterfrontend/screens//notes_page.dart';
 import 'package:flutterfrontend/screens/recording_page.dart';
-import 'screens/home_page.dart';
+//import 'screens/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,6 @@ class _MyAppState extends State<MyApp> {
   static const List<Widget> _screens = <Widget>[
     HomePage(),
     Calendar(),
-    RecordingPage(),
     AnalysisPage(),
     Notes()
   ];
@@ -54,10 +53,10 @@ class _MyAppState extends State<MyApp> {
                 icon: const Icon(Icons.calendar_today, color: Colors.black),
                 label: "Calendar",
                 backgroundColor: Colors.grey[350]),
-            BottomNavigationBarItem(
-                icon: const Icon(Icons.upload_file, color: Colors.black),
-                label: "Upload audio",
-                backgroundColor: Colors.grey[350]),
+            // BottomNavigationBarItem(
+            //     icon: const Icon(Icons.upload_file, color: Colors.black),
+            //     label: "Upload audio",
+            //     backgroundColor: Colors.grey[350]),
             BottomNavigationBarItem(
                 icon: const Icon(Icons.analytics, color: Colors.black),
                 label: "Analysis",
