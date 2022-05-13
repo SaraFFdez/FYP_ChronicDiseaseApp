@@ -1,7 +1,8 @@
 import spacy
-import helpers
+import AudioProcessing.helpers as helpers
 import numpy as np
 
+#save any modifications to the entity ruler (from the expected files)
 def save_entity_ruler():
     nlp = spacy.load("en_core_web_sm")
     config = {
@@ -15,6 +16,7 @@ def save_entity_ruler():
     ruler.add_patterns(patterns)
     ruler.to_disk("Backend\\AudioProcessing\\trained_algorithms\\entity_ruler")
 
+
 def symptoms_identifier(text):
     nlp = spacy.load("en_core_web_sm") #load pretrained nlp model
     ruler = nlp.add_pipe("entity_ruler", after="ner") #create entity ruler
@@ -25,7 +27,6 @@ def symptoms_identifier(text):
     symptoms_found_id = []
 
     for ent in doc.ents: #find symptoms entities and add them to a list if they are not repeated.
-        #print (ent.text, ent.label_, ent.ent_id_) #delete later
         if ent.label_ == "SYMPTOM": #check it is a symptom
             if text_classifier_symptoms(ent.sent.text): #check the phrase is "positive"
                 #handle patterns
@@ -74,11 +75,5 @@ def sensitivity_pattern_handler(ent):
         if word.lower_ != "sensitivity":
             return word.lemma_ + " sensitivity"
     return "unidentified sensitivity"
-
-def test_symptoms_func(num1, num2):
-    for i in range(num1,num2):
-        text = helpers.audio_tests(i)
-        print(text)
-        print("LIST OF SYMPTOMS", symptoms_identifier(text))
 
 #save_entity_ruler()

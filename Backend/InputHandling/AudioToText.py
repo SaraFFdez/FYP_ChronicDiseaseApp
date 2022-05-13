@@ -69,7 +69,6 @@ def AIspeechToTex(audio):
     }
     response = requests.post(endpoint, json=json, headers=headers)
     transcript_id = response.json()['id']
-    #print(transcript_id)
     
     # Step 2. Retrieve Job Status
     #retrieve until status is completed and print the transciption. Sleep to not make too amany requests (might not be necessary)
@@ -77,10 +76,12 @@ def AIspeechToTex(audio):
         time.sleep(3)
         response_status = retrieve_transcript(transcript_id, headers)
         if response_status['status'] == 'completed' :
-            print(response_status['text'])
+            #print("Response status", response_status['text'])
+            return response_status['text']
             break
         elif response_status['status'] == 'error':
-            print("There was an error")
+            #print("There was an error")
+            return "Error"
             break 
 
 #---------------------------------------------------------- Sphinx --------------------------------------------------------   
