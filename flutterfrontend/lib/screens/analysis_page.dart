@@ -8,6 +8,13 @@ class AnalysisPage extends StatefulWidget {
 }
 
 class _AnalysisPageState extends State<AnalysisPage> {
+  List<String> activities = ["go for a walk", "go to school", "relax", " "];
+  List<String> symptoms = [
+    "nausea",
+    "bloating",
+    "headaches",
+    "digestive issues"
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,17 +23,34 @@ class _AnalysisPageState extends State<AnalysisPage> {
         padding: const EdgeInsets.all(15.0),
         child: Column(children: [
           Row(
-            children: [
+            children: const [
               Text("Symptoms graph"),
               SizedBox(width: 40.0),
               Icon(Icons.settings, color: Colors.black)
             ],
           ),
-          const SizedBox(
-            height: 200.0,
-            child: Center(
-              child: Text("Syptoms graph here"),
-            ),
+          Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Symptoms experienced today',
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Container(
+                  margin: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+                  child: Table(
+                      defaultVerticalAlignment:
+                          TableCellVerticalAlignment.middle,
+                      //defaultColumnWidth: ,
+                      // border: TableBorder.all(
+                      //     color: Colors.black, style: BorderStyle.solid, width: 1),
+                      children: [
+                        buildRow(["Symptom 1", "Symptom 1"]),
+                        buildRow(["Symptom 1", "Symptom 1"]),
+                      ]))
+            ],
           ),
           Row(
             children: const [
@@ -36,13 +60,13 @@ class _AnalysisPageState extends State<AnalysisPage> {
             ],
           ),
           Container(
-              margin: const EdgeInsets.all(15),
+              margin: const EdgeInsets.all(15.0),
               child: Table(
                   defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                   //defaultColumnWidth: ,
                   // border: TableBorder.all(
                   //     color: Colors.black, style: BorderStyle.solid, width: 1),
-                  border: TableBorder(
+                  border: const TableBorder(
                       // right: BorderSide(width: 1.0, color: Colors.black),
                       // left: BorderSide(width: 1.0, color: Colors.black),
                       horizontalInside:
@@ -50,56 +74,13 @@ class _AnalysisPageState extends State<AnalysisPage> {
                       verticalInside:
                           BorderSide(width: 1.0, color: Colors.black)),
                   children: [
-                    TableRow(children: [
-                      Column(children: const [
-                        Padding(
-                          padding: EdgeInsets.all(4.0),
-                          child: Text('Morning',
-                              style: TextStyle(
-                                  fontSize: 16.0, fontWeight: FontWeight.bold)),
-                        )
-                      ]),
-                      Column(children: const [
-                        Text('Afternoon',
-                            style: TextStyle(
-                                fontSize: 16.0, fontWeight: FontWeight.bold))
-                      ]),
-                      Column(children: const [
-                        Text('Evening',
-                            style: TextStyle(
-                                fontSize: 16.0, fontWeight: FontWeight.bold))
-                      ]),
-                      Column(children: const [
-                        Text('Undet. time',
-                            style: TextStyle(
-                                fontSize: 16.0, fontWeight: FontWeight.bold))
-                      ]),
-                    ]),
-                    TableRow(children: [
-                      Column(children: [
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Text('Food 1'),
-                        )
-                      ]),
-                      Column(children: [Text('Food 2')]),
-                      Column(children: [Text('Food 1')]),
-                      Column(children: [Text('Food 1')]),
-                    ]),
-                    TableRow(children: [
-                      Column(children: [
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Text('Food 1'),
-                        )
-                      ]),
-                      Column(children: [Text('Food 2')]),
-                      Column(children: [Text('Food 1')]),
-                      Column(children: [Text('Food 1')]),
-                    ])
+                    buildRow(["Morning", "Afternoon", "Evening", "Undet. time"],
+                        isHeader: true),
+                    buildRow(["Food 1", "Food 1", "Food 1", "Food 1"]),
+                    buildRow(["Food 1", "Food 1", "Food 1", "Food 1"]),
                   ])),
           Row(
-            children: [
+            children: const [
               Text("Activity log"),
               SizedBox(width: 40.0),
               Icon(Icons.settings, color: Colors.black)
@@ -107,29 +88,40 @@ class _AnalysisPageState extends State<AnalysisPage> {
           ),
           Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text(
                   'Activities done today',
                   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Text(
-                  'Activity 1',
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Text(
-                  'Activity 1',
-                ),
-              )
+              Container(
+                  margin: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+                  child: Table(
+                      defaultVerticalAlignment:
+                          TableCellVerticalAlignment.middle,
+                      //defaultColumnWidth: ,
+                      // border: TableBorder.all(
+                      //     color: Colors.black, style: BorderStyle.solid, width: 1),
+                      children: [
+                        buildRow(["Activity 1", "Activity 1"]),
+                        buildRow(["Activity 1", "Activity 1"]),
+                      ]))
             ],
           )
         ]),
       ),
     );
   }
+
+  TableRow buildRow(List<String> cells, {bool isHeader = false}) => TableRow(
+          children: cells.map((cell) {
+        final txtStyle = TextStyle(
+            fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
+            fontSize: isHeader ? 16.0 : 14.0);
+        return Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Center(child: Text(cell, style: txtStyle)),
+        );
+      }).toList());
 }
