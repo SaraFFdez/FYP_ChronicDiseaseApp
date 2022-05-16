@@ -8,7 +8,7 @@ class AnalysisPage extends StatefulWidget {
 }
 
 class _AnalysisPageState extends State<AnalysisPage> {
-  List<String> activities = ["go for a walk", "go to school", "relax", " "];
+  List<String> activities = ["go for a walk", "go to school", "relax"];
   List<String> symptoms = [
     "nausea",
     "bloating",
@@ -46,10 +46,7 @@ class _AnalysisPageState extends State<AnalysisPage> {
                       //defaultColumnWidth: ,
                       // border: TableBorder.all(
                       //     color: Colors.black, style: BorderStyle.solid, width: 1),
-                      children: [
-                        buildRow(["Symptom 1", "Symptom 1"]),
-                        buildRow(["Symptom 1", "Symptom 1"]),
-                      ]))
+                      children: [...buildAllRows(symptoms)]))
             ],
           ),
           Row(
@@ -103,10 +100,7 @@ class _AnalysisPageState extends State<AnalysisPage> {
                       //defaultColumnWidth: ,
                       // border: TableBorder.all(
                       //     color: Colors.black, style: BorderStyle.solid, width: 1),
-                      children: [
-                        buildRow(["Activity 1", "Activity 1"]),
-                        buildRow(["Activity 1", "Activity 1"]),
-                      ]))
+                      children: [...buildAllRows(activities)]))
             ],
           )
         ]),
@@ -124,4 +118,38 @@ class _AnalysisPageState extends State<AnalysisPage> {
           child: Center(child: Text(cell, style: txtStyle)),
         );
       }).toList());
+
+  List<TableRow> buildAllRows(List<String> array) {
+    List<TableRow> rows = [];
+
+    if (array.isEmpty) {
+      return [
+        buildRow(["None found"])
+      ];
+    } else if (array.length.remainder(2) == 1) {
+      array.add(" ");
+    }
+
+    for (var i = 0; i < array.length; i = i + 2) {
+      rows.add(buildRow([array[i], array[i + 1]]));
+    }
+    return rows;
+  }
+
+  List<TableRow> buildAllRowsFood(List<String> array) {
+    List<TableRow> rows = [];
+
+    if (array.isEmpty) {
+      return [
+        buildRow(["None found"])
+      ];
+    } else if (array.length.remainder(3) != 0) {
+      array.add(" ");
+    }
+
+    for (var i = 0; i < array.length; i = i + 2) {
+      rows.add(buildRow([array[i], array[i + 1]]));
+    }
+    return rows;
+  }
 }
