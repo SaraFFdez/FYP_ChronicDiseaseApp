@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class AnalysisPage extends StatefulWidget {
@@ -8,13 +10,19 @@ class AnalysisPage extends StatefulWidget {
 }
 
 class _AnalysisPageState extends State<AnalysisPage> {
-  List<String> activities = ["go for a walk", "go to school", "relax"];
+  List<String> activities = [];
   List<String> symptoms = [
     "nausea",
     "bloating",
     "headaches",
     "digestive issues"
   ];
+  Map<String, List<String>> foodDiary = {
+    "morning": ["avocado", "toast", "eggs"],
+    "afternoon": ["pasta carbonara", "cheese"],
+    "evening": ["soup", "peas"],
+    "no_time": ["smoothie"]
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +51,6 @@ class _AnalysisPageState extends State<AnalysisPage> {
                   child: Table(
                       defaultVerticalAlignment:
                           TableCellVerticalAlignment.middle,
-                      //defaultColumnWidth: ,
-                      // border: TableBorder.all(
-                      //     color: Colors.black, style: BorderStyle.solid, width: 1),
                       children: [...buildAllRows(symptoms)]))
             ],
           ),
@@ -60,12 +65,7 @@ class _AnalysisPageState extends State<AnalysisPage> {
               margin: const EdgeInsets.all(15.0),
               child: Table(
                   defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                  //defaultColumnWidth: ,
-                  // border: TableBorder.all(
-                  //     color: Colors.black, style: BorderStyle.solid, width: 1),
                   border: const TableBorder(
-                      // right: BorderSide(width: 1.0, color: Colors.black),
-                      // left: BorderSide(width: 1.0, color: Colors.black),
                       horizontalInside:
                           BorderSide(width: 1.0, color: Colors.black),
                       verticalInside:
@@ -73,8 +73,7 @@ class _AnalysisPageState extends State<AnalysisPage> {
                   children: [
                     buildRow(["Morning", "Afternoon", "Evening", "Undet. time"],
                         isHeader: true),
-                    buildRow(["Food 1", "Food 1", "Food 1", "Food 1"]),
-                    buildRow(["Food 1", "Food 1", "Food 1", "Food 1"]),
+                    ...buildAllRowsFood(foodDiary),
                   ])),
           Row(
             children: const [
@@ -97,9 +96,6 @@ class _AnalysisPageState extends State<AnalysisPage> {
                   child: Table(
                       defaultVerticalAlignment:
                           TableCellVerticalAlignment.middle,
-                      //defaultColumnWidth: ,
-                      // border: TableBorder.all(
-                      //     color: Colors.black, style: BorderStyle.solid, width: 1),
                       children: [...buildAllRows(activities)]))
             ],
           )
@@ -136,20 +132,66 @@ class _AnalysisPageState extends State<AnalysisPage> {
     return rows;
   }
 
-  List<TableRow> buildAllRowsFood(List<String> array) {
+  List<TableRow> buildAllRowsFood(Map<String, List<String>> map) {
     List<TableRow> rows = [];
 
-    if (array.isEmpty) {
+    if (map.isEmpty) {
       return [
-        buildRow(["None found"])
+        buildRow(["None found", "None found", "None found", "None found"])
       ];
-    } else if (array.length.remainder(3) != 0) {
-      array.add(" ");
+    }
+    var newMap = mapSameLength(map);
+    var nullCheckList = newMap["morning"] ?? [];
+    var maxLength = nullCheckList.length;
+    if (maxLength == 0) {
+      return [
+        buildRow(["Error", "Error", "Error", "Error"])
+      ];
+    }
+    var keys = map.keys;
+    var errorList = List.filled(maxLength, "Error");
+    for (var i = 0; i < maxLength; i++) {
+      List<String> row = [];
+      for (var key in keys) {
+        var list = newMap[key] ?? errorList;
+
+        row.add(list[i]);
+      }
+      rows.add(buildRow(row));
     }
 
-    for (var i = 0; i < array.length; i = i + 2) {
-      rows.add(buildRow([array[i], array[i + 1]]));
-    }
     return rows;
+  }
+
+  //ASSUME ITS ALL SAME LENGTH FOR NOW
+  Map<String, List<String>> mapSameLength(Map<String, List<String>> map) {
+    Map<String, List<String>> newMap = {
+      "morning": [],
+      "afternoon": [],
+      "evening": [],
+      "no_time": []
+    };
+    var keys = map.keys;
+    int maxLength = 0;
+    for (var key in keys) {
+      var list = map[key] ?? []; //checking for null.
+      if (maxLength < list.length) {
+        maxLength = list.length;
+      }
+    }
+    if (maxLength == 0) {
+      return newMap;
+    }
+    for (var key in keys) {
+      var list = map[key] ?? []; //checking for null.
+      if (maxLength > list.length) {
+        var difference = maxLength - list.length;
+        for (var i = 0; i < difference; i++) {
+          list.add(" ");
+        }
+      }
+      newMap[key] = list;
+    }
+    return newMap;
   }
 }
