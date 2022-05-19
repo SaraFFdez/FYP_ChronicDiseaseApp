@@ -12,16 +12,16 @@ class AnalysisPage extends StatefulWidget {
 class _AnalysisPageState extends State<AnalysisPage> {
   List<String> activities = [];
   List<String> symptoms = [
-    "nausea",
-    "bloating",
-    "headaches",
-    "digestive issues"
+    "Nausea",
+    "Bloating",
+    "Headaches",
+    "Digestive issues"
   ];
   Map<String, List<String>> foodDiary = {
-    "morning": ["avocado", "toast", "eggs"],
-    "afternoon": ["pasta carbonara", "cheese"],
-    "evening": ["soup", "peas"],
-    "no_time": ["smoothie"]
+    "morning": ["Avocado", "Toast", "Eggs"],
+    "afternoon": ["Pasta", "Cheese"],
+    "evening": ["Soup", "Peas"],
+    "no_time": ["Smoothie"]
   };
   @override
   Widget build(BuildContext context) {
