@@ -93,5 +93,10 @@
         "label": "ACTIVITY",
         "pattern": [{"LEMMA": "have"}, {"POS": "DET", "OP": "*"}, {"POS": "NUM", "OP": "*"}, {"LEMMA": "exam"} ],
         "id": "have an exam"
+    },
+    {
+        "label": "ACTIVITY",
+        "pattern": [{"LEMMA": "tidy"}, {"LEMMA": "up"}],
+        "id": "tidy up"
     }
 ]

@@ -3,7 +3,8 @@ import numpy as np
 
 #returns a dictionary of the foods in the text and the time they were consumed at.
 def food_timing_identificator(text, model_dir = "Backend\\AudioProcessing\\trained_algorithms\\ML\\food_NER_ML\\model-best"):
-    nlpFood = spacy.load(model_dir) #load pretrained model
+    #nlpFood = spacy.load(model_dir) #load pretrained model
+    nlpFood = spacy.load("en_food_ner")
     nlpFood.add_pipe("sentencizer")
     doc = nlpFood(text) 
     food_dict = {"no_time" : [], "morning" : [], "afternoon" : [], "evening": []} #initialize the dictionary
@@ -40,3 +41,5 @@ def time_of_food(sentence, model_dir = 'Backend\\AudioProcessing\\trained_algori
         return "evening"
 
     return "no_time"
+
+#print(food_timing_identificator("Avocado toast is what I had."))

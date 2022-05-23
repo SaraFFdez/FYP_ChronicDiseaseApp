@@ -231,7 +231,22 @@
     },
     {
         "label": "SYMPTOM",
+        "pattern": "bloated",
+        "id": "bloating"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "bloat",
+        "id": "bloating"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": "gas",
+        "id": "gas"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "gassy",
         "id": "gas"
     },
     {
@@ -252,6 +267,11 @@
     {
         "label": "SYMPTOM",
         "pattern": [{"LEMMA": "pain"}, {"POS": "ADP", "OP": "*"}, {"POS": "DET", "OP": "*"}, {"POS": "ADJ", "OP": "*"}, {"POS": "NOUN"}],
+        "id": "pain_noun"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": [{"LEMMA": "hurt"}, {"POS": "ADP", "OP": "*"}, {"POS": "DET", "OP": "*"}, {"POS": "ADJ", "OP": "*"}, {"POS": "NOUN"}],
         "id": "pain_noun"
     },
     {
@@ -282,6 +302,11 @@
     {
         "label": "SYMPTOM",
         "pattern": "shortness of breath",
+        "id": "shortness of breath"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "breathless",
         "id": "shortness of breath"
     },
     {
@@ -411,7 +436,7 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "cough",
+        "pattern": {"LEMMA": "cough"},
         "id": "cough"
     },
     {
@@ -426,13 +451,13 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "physical tiredness",
-        "id": "physical tiredness"
+        "pattern": "hair loss",
+        "id": "hair loss"
     },
     {
         "label": "SYMPTOM",
-        "pattern": "Hair loss",
-        "id": "Hair loss"
+        "pattern": [{"LEMMA": "loose"}, {"LEMMA": "hair"}],
+        "id": "hair loss"
     },
     {
         "label": "SYMPTOM",
@@ -451,7 +476,7 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "sneezing",
+        "pattern": {"LEMMA": "sneeze"},
         "id": "sneezing"
     },
     {
@@ -481,7 +506,7 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "nightmares",
+        "pattern": {"LEMMA": "nightmare"},
         "id": "nightmares"
     },
     {
@@ -492,6 +517,11 @@
     {
         "label": "SYMPTOM",
         "pattern": "overwhelmed",
+        "id": "overwhelmed"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "overwhelming",
         "id": "overwhelmed"
     },
     {
@@ -507,6 +537,11 @@
     {
         "label": "SYMPTOM",
         "pattern": "exhaustion",
+        "id": "fatigue"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "exhausted",
         "id": "fatigue"
     },
     {
@@ -551,7 +586,17 @@
     },
     {
         "label": "SYMPTOM",
+        "pattern": [{"LEMMA": "get"}, {"LEMMA": "a"}, {"LEMMA": "temperature"}] ,
+        "id": "Fever"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": "dissociation",
+        "id": "dissociation"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": {"LEMMA": "dissociate"},
         "id": "dissociation"
     },
     {
@@ -566,7 +611,7 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "Fainting",
+        "pattern": {"LEMMA": "faint"},
         "id": "Fainting"
     },
     {

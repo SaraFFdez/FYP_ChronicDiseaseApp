@@ -25,7 +25,7 @@ def main():
     print("ACTIVITY LIST:", activityList)
     data = {"SYMPTOM LIST": symptomsList, "FOOD DIARY DICTIONARY": foodDiary, "ACTIVITY LIST": activityList, "status": "sent"}
     FYPset = db.FYP
-    results = FYPset.insert_one(data)
+    #results = FYPset.insert_one(data)
     #toc = time.perf_counter()
     #print(f"Time taken: {toc - tic:0.4f} seconds")
     
