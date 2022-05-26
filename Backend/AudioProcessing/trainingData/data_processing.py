@@ -76,10 +76,10 @@ def get_cvs_data_symptoms():
 
 def get_cvs_data_food():
     # read in the food csv file
-    food_df = pd.read_csv(training_path + "food.csv")
+    food_df = pd.read_csv(training_path + "food2.csv")
     # print row and column information
     food_df.head()
-    foods = food_df[food_df["description"].str.contains("[^a-zA-Z ]") == False]["description"].apply(lambda food: food.lower())
+    foods = food_df[food_df["Category"].str.contains("[^a-zA-Z ]") == False]["Category"].apply(lambda food: food.lower())
     # filter out foods with more than 3 words, drop any duplicates
     foods = foods[foods.str.split().apply(len) <= 3].drop_duplicates()
     # print the remaining size
@@ -173,7 +173,7 @@ def create_data_sets_symptoms(symptoms,sentence_limit = 167):
     
     return TRAIN_DATA, TEST_DATA
 
-def create_data_sets_food(foods ,sentence_limit = 167):
+def create_data_sets_food(foods ,sentence_limit = 110):
     food_templates = load_data(training_path + "food_templates.json")
     TRAIN_FOOD_DATA = {
         "one_food": [],
