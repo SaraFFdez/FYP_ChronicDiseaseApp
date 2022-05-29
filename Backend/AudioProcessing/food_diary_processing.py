@@ -9,13 +9,27 @@ def food_timing_identificator(text, model_dir = "Backend\\AudioProcessing\\train
     doc = nlpFood(text) 
     food_dict = {"no_time" : [], "morning" : [], "afternoon" : [], "evening": []} #initialize the dictionary
     no_food_ents = True
+    foods_no_classif = []
 
     for ent in doc.ents:
         if ent.label_ == "FOOD":
-            #do we want any checks like: this thing is a noun (which i am pretty sure it should be lol)?
             no_food_ents = False
             key = time_of_food(ent.sent.text)
-            food_dict[key].append(ent.text)
+            if key == "no_time":
+                foods_no_classif.append(ent.text)
+            else:
+                food_dict[key].append(ent.text)
+            
+    if len(foods_no_classif) != 0:
+        nlp = spacy.load("en_core_web_sm")
+        processed_text = preprocessing(text)
+        doc2 = nlp(processed_text)
+        for food in foods_no_classif:
+            for token in doc2:
+                if token.text in food:
+                   key = time_of_food(token.sent.text)
+                   food_dict[key].append(food) 
+                   break
 
     if no_food_ents: 
         return dict() #if no food entities found, return an empty dictionary

@@ -6,7 +6,17 @@
     },
     {
         "label": "ACTIVITY",
-        "pattern": [{"POS": "VERB"}, {"POS": "AUX"}, {"POS": "DET", "OP": "*"}, {"POS": "PRON", "OP": "*"}, {"POS": "NOUN"}, {"POS": "NOUN", "OP": "*"}],
+        "pattern": [{"POS": "VERB"}, {"POS": "AUX", "OP": "*"}, {"POS": "DET", "OP": "*"}, {"POS": "PRON", "OP": "*"}, {"POS": "NOUN"}, {"POS": "ADJ", "OP": "*"}, {"POS": "NOUN", "OP": "*"}],
+        "id": "general_activity"
+    },
+    {
+        "label": "ACTIVITY",
+        "pattern": [{"POS": "VERB"}, {"POS": "ADP", "OP": "*"}, {"POS": "DET", "OP": "*"}, {"POS": "PRON", "OP": "+"}],
+        "id": "general_activity"
+    },
+    {
+        "label": "ACTIVITY",
+        "pattern": [{"POS": "VERB"}, {"POS": "DET", "OP": "*"}, {"POS": "PRON", "OP": "*"}, {"POS": "PROPN", "OP": "*"}, {"POS": "NOUN"}],
         "id": "general_activity"
     },
     {
@@ -21,7 +31,12 @@
     },
     {
         "label": "ACTIVITY",
-        "pattern": [{"LEMMA": "go"}, {"POS": "VERB"}],
+        "pattern": [{"LEMMA": "do"}, {"POS": "DET", "OP": "*"}, {"POS": "PRON", "OP": "*"}, {"POS": "VERB"}],
+        "id": "general_activity"
+    },
+    {
+        "label": "ACTIVITY",
+        "pattern": [{"LEMMA": "go"}, {"POS": "ADV", "OP": "*"}, {"POS": "DET", "OP": "*"}, {"POS": "PART", "OP": "*"}, {"POS": "VERB"}],
         "id": "general_activity"
     },
     {

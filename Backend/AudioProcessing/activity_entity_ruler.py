@@ -48,4 +48,5 @@ def activity_pattern_processing(ent):
     else:
         return ent.ent_id_
 
-# save_entity_ruler_activity()
+
+#save_entity_ruler_activity()

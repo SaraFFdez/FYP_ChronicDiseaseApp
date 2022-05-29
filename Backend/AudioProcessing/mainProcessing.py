@@ -9,7 +9,8 @@ import AudioProcessing.food_diary_processing as food
 #Output: Lists/dictionaries containing the information we need
 def speech_processing_main(input_text):
     symptomsList = symp.symptoms_identifier(input_text)
-    foodDiary = food.food_timing_identificator(input_text)
+    foodDiary1 = food.food_timing_identificator(input_text)
+    foodDiary2 = food.food_timing_identificator_modif(input_text)
     activityList = act.activity_identifier(input_text)
 
-    return symptomsList, foodDiary, activityList
+    return symptomsList, foodDiary1, foodDiary2, activityList
