@@ -24,7 +24,7 @@
 {"label":"SYMPTOM","pattern":[{"LEMMA":"painful"},{"POS":"NOUN"}],"id":"noun_pain"}
 {"label":"SYMPTOM","pattern":[{"POS":"NOUN"},{"POS":"ADV","OP":"*"},{"POS":"VERB","OP":"*"},{"POS":"PART","OP":"*"},{"LEMMA":"hurt"}],"id":"noun_pain"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"pain"},{"POS":"ADP","OP":"*"},{"POS":"DET","OP":"*"},{"POS":"ADJ","OP":"*"},{"POS":"NOUN"}],"id":"pain_noun"}
-{"label":"SYMPTOM","pattern":[{"LEMMA":"hurt"},{"POS":"ADP","OP":"*"},{"POS":"DET","OP":"*"},{"POS":"ADJ","OP":"*"},{"POS":"NOUN"}],"id":"pain_noun"}
+{"label":"SYMPTOM","pattern":[{"LEMMA":"hurt"},{"POS":"ADP","OP":"*"},{"POS":"PRON","OP":"*"},{"POS":"DET","OP":"*"},{"POS":"ADJ","OP":"*"},{"POS":"NOUN"}],"id":"pain_noun"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"pain"},{"POS":"ADP","OP":"*"},{"POS":"PRON","OP":"*"},{"POS":"ADJ","OP":"*"},{"POS":"NOUN"}],"id":"pain_noun"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"pain"},{"POS":"SCONJ","OP":"*"},{"POS":"VERB"},{"POS":"ADP","OP":"*"},{"POS":"DET","OP":"*"},{"POS":"NOUN","OP":"*"}],"id":"pain_verb"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"pain"},{"POS":"SCONJ"},{"POS":"NOUN"}],"id":"pain_verb"}
@@ -33,11 +33,12 @@
 {"label":"SYMPTOM","pattern":[{"LEMMA":"light"},{"LEMMA":"sensitivity"}],"id":"sensitivity"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"sensitive"},{"POS":"ADP","OP":"*"},{"POS":"NOUN"}],"id":"sensitivity"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"sensitivity"},{"POS":"ADP","OP":"*"},{"POS":"NOUN"}],"id":"sensitivity"}
+{"label":"SYMPTOM","pattern":[{"LEMMA":"skin"},{"LEMMA":"is"},{"LEMMA":"dry"}],"id":"dry skin"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"loose"},{"LEMMA":"hair"}],"id":"hair loss"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"vomiting"}],"id":"vomiting"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"vomit"}],"id":"vomiting"}
 {"label":"SYMPTOM","pattern":[{"LEMMA":"throw"},{"LEMMA":"up"}],"id":"vomiting"}
-{"label":"SYMPTOM","pattern":[{"LEMMA":"get"},{"LEMMA":"a"},{"LEMMA":"temperature"}],"id":"Fever"}
+{"label":"SYMPTOM","pattern":[{"LEMMA":"get"},{"LEMMA":"a"},{"LEMMA":"temperature"}],"id":"fever"}
 {"label":"SYMPTOM","pattern":"dizziness","id":"dizziness"}
 {"label":"SYMPTOM","pattern":"dizzy","id":"dizziness"}
 {"label":"SYMPTOM","pattern":"mental fogginess","id":"brain fog"}
@@ -65,6 +66,7 @@
 {"label":"SYMPTOM","pattern":"constipated","id":"constipation"}
 {"label":"SYMPTOM","pattern":"constipation","id":"constipation"}
 {"label":"SYMPTOM","pattern":"stomachache","id":"stomachache"}
+{"label":"SYMPTOM","pattern":"stomach ache","id":"stomachache"}
 {"label":"SYMPTOM","pattern":"stomach pain","id":"stomachache"}
 {"label":"SYMPTOM","pattern":"bloating","id":"bloating"}
 {"label":"SYMPTOM","pattern":"bloated","id":"bloating"}
@@ -77,6 +79,7 @@
 {"label":"SYMPTOM","pattern":"irregular heartbeat","id":"irregular heartbeat"}
 {"label":"SYMPTOM","pattern":"Joint stiffness","id":"Joint stiffness"}
 {"label":"SYMPTOM","pattern":"nausea","id":"nausea"}
+{"label":"SYMPTOM","pattern":"nauseous","id":"nausea"}
 {"label":"SYMPTOM","pattern":"anxiety","id":"anxiety"}
 {"label":"SYMPTOM","pattern":"anxious","id":"anxiety"}
 {"label":"SYMPTOM","pattern":"vertigo","id":"vertigo"}
@@ -94,7 +97,11 @@
 {"label":"SYMPTOM","pattern":"depressed","id":"depression"}
 {"label":"SYMPTOM","pattern":"sore joints","id":"sore joints"}
 {"label":"SYMPTOM","pattern":"menstrual cramps","id":"menstrual cramps"}
+{"label":"SYMPTOM","pattern":"cramps","id":"cramps"}
+{"label":"SYMPTOM","pattern":"period cramps","id":"cramps"}
 {"label":"SYMPTOM","pattern":"dry skin","id":"dry skin"}
+{"label":"SYMPTOM","pattern":"coughing","id":"cough"}
+{"label":"SYMPTOM","pattern":"coughed","id":"cough"}
 {"label":"SYMPTOM","pattern":"vaginal itching","id":"vaginal itching"}
 {"label":"SYMPTOM","pattern":"lack of appetite","id":"lack of appetite"}
 {"label":"SYMPTOM","pattern":"hair loss","id":"hair loss"}
@@ -113,7 +120,7 @@
 {"label":"SYMPTOM","pattern":"hand arthritis","id":"hand arthritis"}
 {"label":"SYMPTOM","pattern":"Left eye twitch","id":"Left eye twitch"}
 {"label":"SYMPTOM","pattern":"right shoulder spasms","id":"right shoulder spasms"}
-{"label":"SYMPTOM","pattern":"Fever","id":"Fever"}
+{"label":"SYMPTOM","pattern":"Fever","id":"fever"}
 {"label":"SYMPTOM","pattern":"dissociation","id":"dissociation"}
 {"label":"SYMPTOM","pattern":"tachycardia","id":"tachycardia"}
 {"label":"SYMPTOM","pattern":"shivering","id":"shivering"}

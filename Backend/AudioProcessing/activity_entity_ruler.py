@@ -43,7 +43,7 @@ def activity_pattern_processing(ent):
                 return word.lemma_ + ent.text[(indexOfSpace):] 
                 #return ent.text
         return "Error"
-    elif ent.ent_id == "future_activity":
+    elif ent.ent_id_ == "future_activity":
         return ent.text
     else:
         return ent.ent_id_

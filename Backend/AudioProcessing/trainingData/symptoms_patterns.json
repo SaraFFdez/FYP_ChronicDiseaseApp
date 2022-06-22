@@ -202,8 +202,19 @@
     {
         "label": "SYMPTOM",
         "pattern": "diarreah",
-        "id": "diarreah"
+        "id": "diarrhoea"
     },
+    {
+        "label": "SYMPTOM",
+        "pattern": "diarrhoea",
+        "id": "diarrhoea"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "diarrhea",
+        "id": "diarrhoea"
+    },
+    
     {
         "label": "SYMPTOM",
         "pattern": "constipated",
@@ -217,6 +228,11 @@
     {
         "label": "SYMPTOM",
         "pattern": "stomachache",
+        "id": "stomachache"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "stomach ache",
         "id": "stomachache"
     },
     {
@@ -271,7 +287,7 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": [{"LEMMA": "hurt"}, {"POS": "ADP", "OP": "*"}, {"POS": "DET", "OP": "*"}, {"POS": "ADJ", "OP": "*"}, {"POS": "NOUN"}],
+        "pattern": [{"LEMMA": "hurt"}, {"POS": "ADP", "OP": "*"}, {"POS": "PRON", "OP": "*"}, {"POS": "DET", "OP": "*"}, {"POS": "ADJ", "OP": "*"}, {"POS": "NOUN"}],
         "id": "pain_noun"
     },
     {
@@ -322,6 +338,11 @@
     {
         "label": "SYMPTOM",
         "pattern": "nausea",
+        "id": "nausea"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "nauseous",
         "id": "nausea"
     },
     {
@@ -431,12 +452,42 @@
     },
     {
         "label": "SYMPTOM",
+        "pattern": "cramps",
+        "id": "cramps"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "period cramps",
+        "id": "cramps"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": "dry skin",
         "id": "dry skin"
     },
     {
         "label": "SYMPTOM",
+        "pattern": [{"LEMMA": "skin"}, {"LEMMA": "is"}, {"LEMMA": "dry"}],
+        "id": "dry skin"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": {"LEMMA": "cough"},
+        "id": "cough"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "coughing",
+        "id": "cough"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "cough",
+        "id": "cough"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "coughed",
         "id": "cough"
     },
     {
@@ -582,12 +633,12 @@
     {
         "label": "SYMPTOM",
         "pattern": "Fever",
-        "id": "Fever"
+        "id": "fever"
     },
     {
         "label": "SYMPTOM",
         "pattern": [{"LEMMA": "get"}, {"LEMMA": "a"}, {"LEMMA": "temperature"}] ,
-        "id": "Fever"
+        "id": "fever"
     },
     {
         "label": "SYMPTOM",

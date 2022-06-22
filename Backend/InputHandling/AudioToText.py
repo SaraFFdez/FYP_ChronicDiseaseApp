@@ -77,12 +77,13 @@ def AIspeechToTex(audio):
         response_status = retrieve_transcript(transcript_id, headers)
         if response_status['status'] == 'completed' :
             #print("Response status", response_status['text'])
+            print("Confidence value", response_status['confidence'])
             return response_status['text']
-            break
+            
         elif response_status['status'] == 'error':
             #print("There was an error")
             return "Error"
-            break 
+            
 
 #---------------------------------------------------------- Sphinx --------------------------------------------------------   
 #Input: an audio file

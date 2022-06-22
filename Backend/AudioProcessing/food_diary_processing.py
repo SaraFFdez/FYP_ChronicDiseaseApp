@@ -24,12 +24,18 @@ def food_timing_identificator(text, model_dir = "Backend\\AudioProcessing\\train
         nlp = spacy.load("en_core_web_sm")
         processed_text = preprocessing(text)
         doc2 = nlp(processed_text)
-        for food in foods_no_classif:
+        for food in foods_no_classif[:]:
+            food_list = food.split()
             for token in doc2:
-                if token.text in food:
+                if token.pos_ == "NOUN" and token.text in food_list:
                    key = time_of_food(token.sent.text)
-                   food_dict[key].append(food) 
+                   food_dict[key].append(food)
+                   foods_no_classif.remove(food) 
                    break
+    if len(foods_no_classif) != 0:
+        for food in foods_no_classif:
+            food_dict["no_time"].append(food)
+
 
     if no_food_ents: 
         return dict() #if no food entities found, return an empty dictionary
@@ -53,17 +59,23 @@ def food_timing_identificator_modif(text, model_dir = "Backend\\AudioProcessing\
                 foods_no_classif.append(ent.text)
             else:
                 food_dict[key].append(ent.text)
-            
+     
     if len(foods_no_classif) != 0:
         nlp = spacy.load("en_core_web_sm")
         processed_text = preprocessing(text)
         doc2 = nlp(processed_text)
-        for food in foods_no_classif:
+        for food in foods_no_classif[:]:
+            food_list = food.split()
             for token in doc2:
-                if token.text in food:
+                if token.pos_ == "NOUN" and token.text in food_list:
                    key = time_of_food(token.sent.text)
-                   food_dict[key].append(food) 
+                   food_dict[key].append(food)
+                   foods_no_classif.remove(food) 
                    break
+    if len(foods_no_classif) != 0:
+        for food in foods_no_classif:
+            food_dict["no_time"].append(food)
+
 
     if no_food_ents: 
         return dict() #if no food entities found, return an empty dictionary
@@ -76,7 +88,6 @@ def time_of_food(sentence, model_dir = 'Backend\\AudioProcessing\\trained_algori
     nlpClassify = spacy.load(model_dir) #load classification model
     doc = nlpClassify(sentence) #process sentence
     max_confidence_label = list(doc.cats.keys())[np.argmax(np.array(list(doc.cats.values())))] #find label
-
     if doc.cats[max_confidence_label] < threshold: #if it is not past a certain threshold, assume no time has been specified
         return "no_time"
     
@@ -112,5 +123,5 @@ def testTexts():
     t7 = "This morning I woke up and I ate some Greek yoghurt with grapes. I felt tired and hungry. After this, I ate some cinnamon swirls and I felt less hungry but I had a fever and a sore throat at this time. After this I went to go play badminton. I walked through Hyde Park which was nice but the wind was blowing so I felt cold and I shivered. Then when I got to the sports Hall, I played badminton but I hurt my wrist and I scratched my wrist as well. So I had a scratch and I had a sprained wrist. After this I went to go eat food, but the food was poisoned so I got salmonella and I got a temperature. Then I came back home and I played some video games, but I had eyes trained because the computer screen was too bright and the sun was shining and reflecting off of the screen. So my eyes hurt and I had ache coming from my forehead. Then I went to sleep because I felt really tired."
     return [t1,t2,t3, t4, t5,t6, t7]
 
-test_food(testTexts())
+#test_food(testTexts())
 
