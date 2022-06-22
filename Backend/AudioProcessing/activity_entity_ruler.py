@@ -43,7 +43,10 @@ def activity_pattern_processing(ent):
                 return word.lemma_ + ent.text[(indexOfSpace):] 
                 #return ent.text
         return "Error"
+    elif ent.ent_id_ == "future_activity":
+        return ent.text
     else:
         return ent.ent_id_
 
-# save_entity_ruler_activity()
+
+#save_entity_ruler_activity()

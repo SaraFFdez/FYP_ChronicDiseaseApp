@@ -202,8 +202,19 @@
     {
         "label": "SYMPTOM",
         "pattern": "diarreah",
-        "id": "diarreah"
+        "id": "diarrhoea"
     },
+    {
+        "label": "SYMPTOM",
+        "pattern": "diarrhoea",
+        "id": "diarrhoea"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "diarrhea",
+        "id": "diarrhoea"
+    },
+    
     {
         "label": "SYMPTOM",
         "pattern": "constipated",
@@ -221,6 +232,11 @@
     },
     {
         "label": "SYMPTOM",
+        "pattern": "stomach ache",
+        "id": "stomachache"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": "stomach pain",
         "id": "stomachache"
     },
@@ -231,7 +247,22 @@
     },
     {
         "label": "SYMPTOM",
+        "pattern": "bloated",
+        "id": "bloating"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "bloat",
+        "id": "bloating"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": "gas",
+        "id": "gas"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "gassy",
         "id": "gas"
     },
     {
@@ -252,6 +283,11 @@
     {
         "label": "SYMPTOM",
         "pattern": [{"LEMMA": "pain"}, {"POS": "ADP", "OP": "*"}, {"POS": "DET", "OP": "*"}, {"POS": "ADJ", "OP": "*"}, {"POS": "NOUN"}],
+        "id": "pain_noun"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": [{"LEMMA": "hurt"}, {"POS": "ADP", "OP": "*"}, {"POS": "PRON", "OP": "*"}, {"POS": "DET", "OP": "*"}, {"POS": "ADJ", "OP": "*"}, {"POS": "NOUN"}],
         "id": "pain_noun"
     },
     {
@@ -286,6 +322,11 @@
     },
     {
         "label": "SYMPTOM",
+        "pattern": "breathless",
+        "id": "shortness of breath"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": "irregular heartbeat",
         "id": "irregular heartbeat"
     },
@@ -297,6 +338,11 @@
     {
         "label": "SYMPTOM",
         "pattern": "nausea",
+        "id": "nausea"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "nauseous",
         "id": "nausea"
     },
     {
@@ -406,12 +452,42 @@
     },
     {
         "label": "SYMPTOM",
+        "pattern": "cramps",
+        "id": "cramps"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "period cramps",
+        "id": "cramps"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": "dry skin",
         "id": "dry skin"
     },
     {
         "label": "SYMPTOM",
+        "pattern": [{"LEMMA": "skin"}, {"LEMMA": "is"}, {"LEMMA": "dry"}],
+        "id": "dry skin"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": {"LEMMA": "cough"},
+        "id": "cough"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "coughing",
+        "id": "cough"
+    },
+    {
+        "label": "SYMPTOM",
         "pattern": "cough",
+        "id": "cough"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "coughed",
         "id": "cough"
     },
     {
@@ -426,13 +502,13 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "physical tiredness",
-        "id": "physical tiredness"
+        "pattern": "hair loss",
+        "id": "hair loss"
     },
     {
         "label": "SYMPTOM",
-        "pattern": "Hair loss",
-        "id": "Hair loss"
+        "pattern": [{"LEMMA": "loose"}, {"LEMMA": "hair"}],
+        "id": "hair loss"
     },
     {
         "label": "SYMPTOM",
@@ -451,7 +527,7 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "sneezing",
+        "pattern": {"LEMMA": "sneeze"},
         "id": "sneezing"
     },
     {
@@ -481,7 +557,7 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "nightmares",
+        "pattern": {"LEMMA": "nightmare"},
         "id": "nightmares"
     },
     {
@@ -492,6 +568,11 @@
     {
         "label": "SYMPTOM",
         "pattern": "overwhelmed",
+        "id": "overwhelmed"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "overwhelming",
         "id": "overwhelmed"
     },
     {
@@ -507,6 +588,11 @@
     {
         "label": "SYMPTOM",
         "pattern": "exhaustion",
+        "id": "fatigue"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": "exhausted",
         "id": "fatigue"
     },
     {
@@ -547,11 +633,21 @@
     {
         "label": "SYMPTOM",
         "pattern": "Fever",
-        "id": "Fever"
+        "id": "fever"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": [{"LEMMA": "get"}, {"LEMMA": "a"}, {"LEMMA": "temperature"}] ,
+        "id": "fever"
     },
     {
         "label": "SYMPTOM",
         "pattern": "dissociation",
+        "id": "dissociation"
+    },
+    {
+        "label": "SYMPTOM",
+        "pattern": {"LEMMA": "dissociate"},
         "id": "dissociation"
     },
     {
@@ -566,7 +662,7 @@
     },
     {
         "label": "SYMPTOM",
-        "pattern": "Fainting",
+        "pattern": {"LEMMA": "faint"},
         "id": "Fainting"
     },
     {

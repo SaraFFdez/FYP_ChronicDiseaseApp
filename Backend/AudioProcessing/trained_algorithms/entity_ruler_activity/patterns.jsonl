@@ -1,8 +1,11 @@
 {"label":"ACTIVITY","pattern":[{"POS":"VERB"},{"POS":"ADP","OP":"*"},{"POS":"DET","OP":"*"},{"POS":"PRON","OP":"*"},{"POS":"ADJ","OP":"*"},{"POS":"NOUN"},{"POS":"NOUN","OP":"*"}],"id":"general_activity"}
-{"label":"ACTIVITY","pattern":[{"POS":"VERB"},{"POS":"AUX"},{"POS":"DET","OP":"*"},{"POS":"PRON","OP":"*"},{"POS":"NOUN"},{"POS":"NOUN","OP":"*"}],"id":"general_activity"}
+{"label":"ACTIVITY","pattern":[{"POS":"VERB"},{"POS":"AUX","OP":"*"},{"POS":"DET","OP":"*"},{"POS":"PRON","OP":"*"},{"POS":"NOUN"},{"POS":"ADJ","OP":"*"},{"POS":"NOUN","OP":"*"}],"id":"general_activity"}
+{"label":"ACTIVITY","pattern":[{"POS":"VERB"},{"POS":"DET","OP":"*"},{"POS":"PRON","OP":"*"},{"POS":"PROPN","OP":"*"},{"POS":"NOUN"}],"id":"general_activity"}
 {"label":"ACTIVITY","pattern":[{"POS":"VERB"},{"POS":"ADV"},{"POS":"ADP","OP":"*"},{"POS":"DET","OP":"*"},{"POS":"PRON","OP":"*"},{"POS":"ADJ","OP":"*"},{"POS":"NOUN","OP":"*"}],"id":"general_activity"}
 {"label":"ACTIVITY","pattern":[{"LEMMA":"go"},{"POS":"VERB"}],"id":"general_activity"}
-{"label":"ACTIVITY","pattern":[{"LEMMA":"go"},{"POS":"VERB"}],"id":"general_activity"}
+{"label":"ACTIVITY","pattern":[{"LEMMA":"do"},{"POS":"DET","OP":"*"},{"POS":"PRON","OP":"*"},{"POS":"VERB"}],"id":"general_activity"}
+{"label":"ACTIVITY","pattern":[{"LEMMA":"VERB"},{"POS":"DET","OP":"*"},{"POS":"PRON","OP":"*"},{"POS":"PART","OP":"*"},{"POS":"VERB"}],"id":"general_activity"}
+{"label":"ACTIVITY","pattern":[{"LEMMA":"go"},{"POS":"ADV","OP":"*"},{"POS":"DET","OP":"*"},{"POS":"PART","OP":"*"},{"POS":"VERB"}],"id":"general_activity"}
 {"label":"ACTIVITY","pattern":[{"POS":"VERB"},{"POS":"ADP"},{"POS":"PROPN"},{"POS":"PART","OP":"*"},{"POS":"NOUN","OP":"*"}],"id":"general_activity"}
 {"label":"ACTIVITY","pattern":[{"LEMMA":"be"},{"LEMMA":"go"},{"POS":"PART","OP":"*"},{"POS":"VERB"},{"POS":"DET","OP":"*"},{"POS":"NOUN","OP":"*"}],"id":"future_activity"}
 {"label":"ACTIVITY","pattern":[{"LEMMA":"will"},{"POS":"VERB"},{"POS":"DET","OP":"*"},{"POS":"ADP","OP":"*"},{"POS":"NOUN","OP":"*"}],"id":"future_activity"}
@@ -16,4 +19,5 @@
 {"label":"ACTIVITY","pattern":[{"LEMMA":"have"},{"POS":"DET","OP":"*"},{"LEMMA":"nap"}],"id":"take a nap"}
 {"label":"ACTIVITY","pattern":[{"LEMMA":"have"},{"POS":"DET","OP":"*"},{"POS":"NUM","OP":"*"},{"LEMMA":"exam"}],"id":"have an exam"}
 {"label":"ACTIVITY","pattern":[{"LEMMA":"have"},{"POS":"DET","OP":"*"},{"POS":"NUM","OP":"*"},{"LEMMA":"exam"}],"id":"have an exam"}
+{"label":"ACTIVITY","pattern":[{"LEMMA":"tidy"},{"LEMMA":"up"}],"id":"tidy up"}
 {"label":"ACTIVITY","pattern":"get dressed","id":"get dressed"}
